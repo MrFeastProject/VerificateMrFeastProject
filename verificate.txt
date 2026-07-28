@@ -9,6 +9,7 @@
 
 ==Telegram Bot==
 @MrFeastClicker_BOT
+@@VerificationMrFeastProject_BOT
 
 ==Telegram User==
 @MrFeast_Official
