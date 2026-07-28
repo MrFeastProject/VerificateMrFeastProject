@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Верификация | MrFeastProject</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cloudflare-icons/2.3.4/cloudflare-icons.min.css" />
     <style>
@@ -116,7 +116,7 @@
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             animation: borderGlow 8s ease-in-out infinite alternate;
-            opacity: 0.5;
+            opacity: 0.4;
             pointer-events: none;
             z-index: 0;
         }
@@ -139,84 +139,120 @@
             z-index: 0;
         }
 
-        .preview-content {
-            position: relative;
-            z-index: 2;
+        .loading-state {
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 20px;
+            padding: 30px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .loading-state.hidden {
+            display: none;
+        }
+
+        .spinner-big {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #1a2e1a;
+            border-top: 4px solid #00ff41;
+            border-radius: 50%;
+            animation: spin 0.8s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.08);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #8fbf8f;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .result-state {
+            display: none;
+            flex-direction: column;
+            align-items: center;
             gap: 12px;
-            animation: fadeInScale 0.6s ease-out;
+            position: relative;
+            z-index: 2;
+            animation: fadeInScale 0.5s ease-out;
+        }
+
+        .result-state.visible {
+            display: flex;
         }
 
         @keyframes fadeInScale {
-            0% { opacity: 0; transform: scale(0.95) translateY(-10px); filter: blur(3px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+            0% { opacity: 0; transform: scale(0.95); filter: blur(3px); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0); }
         }
 
-        .preview-header {
+        .result-header {
             font-size: 2.2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #ccffcc, #00ff41, #66ff88, #00cc33);
-            background-size: 300% 300%;
+            background: linear-gradient(135deg, #ccffcc, #00ff41, #66ff88);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-shadow: 0 0 50px rgba(0, 255, 65, 0.15);
             letter-spacing: 1px;
             margin-bottom: 4px;
-            animation: gradientShift 4s ease-in-out infinite alternate;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        .preview-image {
+        .result-image {
             width: 100%;
             max-width: 180px;
             height: auto;
-            margin: 8px auto;
+            margin: 4px auto;
             border-radius: 12px;
             display: block;
         }
 
-        .preview-title {
+        .result-title {
             font-size: 1.1rem;
             font-weight: 700;
             background: linear-gradient(135deg, #c4ffc4, #00ff41);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
-        .preview-status {
+        .result-status {
             font-size: 1rem;
             font-weight: 600;
         }
 
-        .preview-status.success {
+        .result-status.success {
             color: #00ff41;
         }
 
-        .preview-status.error {
+        .result-status.error {
             color: #ff4444;
         }
 
-        .preview-status i {
+        .result-status.warning {
+            color: #ffaa00;
+        }
+
+        .result-status i {
             margin-right: 8px;
         }
 
-        .preview-desc {
+        .result-desc {
             color: #8fbf8f;
             font-size: 0.9rem;
             line-height: 1.6;
             max-width: 400px;
         }
 
-        .preview-role {
+        .result-role {
             font-size: 0.95rem;
             font-weight: 600;
             padding: 8px 16px;
@@ -229,13 +265,13 @@
             border: 1px solid rgba(0, 255, 65, 0.15);
         }
 
-        .preview-role i {
+        .result-role i {
             -webkit-text-fill-color: initial;
             color: #00ff41;
             margin-right: 8px;
         }
 
-        .preview-badge {
+        .result-badge {
             display: inline-block;
             background: rgba(0, 255, 65, 0.06);
             border: 1px solid rgba(0, 255, 65, 0.1);
@@ -248,14 +284,69 @@
             margin-top: 4px;
         }
 
-        .preview-error {
+        .result-badge.error {
+            border-color: rgba(255, 68, 68, 0.2);
+            color: #ff6666;
+        }
+
+        .result-badge.warning {
+            border-color: rgba(255, 170, 0, 0.2);
+            color: #ffaa44;
+        }
+
+        .btn-retry {
+            background: rgba(18, 26, 18, 0.8);
+            border: 1px solid #1a2e1a;
+            color: #b4e6b4;
+            padding: 10px 28px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .btn-retry:hover {
+            border-color: #2b5a2b;
+            color: #c4ffc4;
+        }
+
+        .btn-retry i {
+            color: #00ff41;
+        }
+
+        .error-state {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .error-state.visible {
+            display: flex;
+        }
+
+        .error-state .error-icon {
+            font-size: 3rem;
             color: #ff4444;
-            border-color: #ff4444;
+        }
+
+        .error-state .error-text {
+            color: #ff6666;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         @media (max-width: 480px) {
             .container { padding: 28px 16px 32px; }
-            .preview-header { font-size: 1.6rem; }
+            .result-header { font-size: 1.6rem; }
         }
     </style>
 </head>
@@ -277,58 +368,178 @@
 </div>
 
 <div class="container">
-    <div class="preview-content" id="previewContent">
-        <!-- Загружается через JavaScript из URL-параметров -->
+
+    <div class="loading-state" id="loadingState">
+        <div class="spinner-big"></div>
+        <div class="loading-text">Проверка верификации...</div>
     </div>
+
+    <div class="result-state" id="resultState">
+        <div class="result-header">✓ Verification MrFeastProject</div>
+        <img class="result-image" id="resultImage" src="" alt="Результат" />
+        <div class="result-title" id="resultTitle">Verification Telegram Content</div>
+        <div class="result-status" id="resultStatus">
+            <i class="cf-icon cf-icon-checkmark-circle"></i> <span id="statusText">Загрузка...</span>
+        </div>
+        <div class="result-desc" id="resultDesc"></div>
+        <div class="result-role" id="resultRole" style="display: none;"></div>
+        <div class="result-badge" id="resultBadge">● Верификация MrFeastProject</div>
+    </div>
+
+    <div class="error-state" id="errorState">
+        <div class="error-icon"><i class="cf-icon cf-icon-warning"></i></div>
+        <div class="error-text">Не удалось проверить верификацию.<br />Проверьте подключение к интернету.</div>
+        <button class="btn-retry" onclick="location.reload()">
+            <i class="cf-icon cf-icon-refresh"></i> Повторить
+        </button>
+    </div>
+
 </div>
 
 <script>
     (function() {
-        const previewContent = document.getElementById('previewContent');
+        'use strict';
 
-        // Получаем параметры из URL
-        const params = new URLSearchParams(window.location.search);
-        const type = params.get('type') || 'не указан';
-        const username = params.get('username') || 'не указан';
-        const found = params.get('found') === 'true';
+        const loadingState = document.getElementById('loadingState');
+        const resultState = document.getElementById('resultState');
+        const errorState = document.getElementById('errorState');
 
-        // Роли
-        const roles = {
+        const resultImage = document.getElementById('resultImage');
+        const resultTitle = document.getElementById('resultTitle');
+        const resultStatus = document.getElementById('resultStatus');
+        const statusText = document.getElementById('statusText');
+        const resultDesc = document.getElementById('resultDesc');
+        const resultRole = document.getElementById('resultRole');
+        const resultBadge = document.getElementById('resultBadge');
+
+        const ROLES = {
             '@MrFeast_Official': '👑 Владелец сайта',
             '@MrFeast_Official2': '👑 Владелец сайта',
             '@VerificationMrFeastProject_BOT': '🤖 Телеграмм бот — Перенаправление на сайт'
         };
 
-        const imageUrl = found
-            ? 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/Verification.png'
-            : 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/NoVerification.png';
+        const VERIFICATE_URL = 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/verificate.txt';
 
-        const statusClass = found ? 'success' : 'error';
-        const statusText = found ? 'Верификация действует' : 'Нету Верификации';
-        const statusIcon = found ? 'cf-icon-checkmark-circle' : 'cf-icon-close-circle';
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type') || 'не указан';
+        const username = params.get('username') || 'не указан';
 
-        let descText = found
-            ? `Данный ${type} ${username} был верифицирован от MrFeastProject.`
-            : `Данный ${type} ${username} не имеет верификацию от MrFeastProject. Мы настоятельно не рекомендуем использовать как либо этот источник.`;
+        function parseList(data) {
+            const categories = {
+                'Канал': [],
+                'Чат': [],
+                'Бот': [],
+                'Юзер': []
+            };
 
-        let roleHtml = '';
-        if (found && roles[username]) {
-            roleHtml = `<div class="preview-role"><i class="cf-icon cf-icon-robot"></i> ${roles[username]}</div>`;
+            let currentCategory = null;
+            const lines = data.split('\n');
+
+            for (let line of lines) {
+                line = line.trim();
+                if (line.startsWith('==Telegram')) {
+                    if (line.includes('Channel')) currentCategory = 'Канал';
+                    else if (line.includes('Chat')) currentCategory = 'Чат';
+                    else if (line.includes('Bot')) currentCategory = 'Бот';
+                    else if (line.includes('User')) currentCategory = 'Юзер';
+                    continue;
+                }
+                if (line && currentCategory && line.startsWith('@')) {
+                    categories[currentCategory].push(line);
+                }
+            }
+
+            return categories;
         }
 
-        previewContent.innerHTML = `
-            <div class="preview-header">✓ Verification MrFeastProject</div>
-            <img class="preview-image" src="${imageUrl}" alt="Результат верификации" />
-            <div class="preview-title">Verification Telegram Content</div>
-            <div class="preview-status ${statusClass}">
-                <i class="cf-icon ${statusIcon}"></i> ${statusText}
-            </div>
-            <div class="preview-desc">${descText}</div>
-            ${roleHtml}
-            <div class="preview-badge">● Верификация MrFeastProject</div>
-        `;
+        function showResult(found, type, username, wasExpired) {
+            loadingState.classList.add('hidden');
+            resultState.classList.add('visible');
 
-        console.log('✅ Страница-превью загружена');
+            const imageUrl = found
+                ? 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/Verification.png'
+                : 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/NoVerification.png';
+
+            resultImage.src = imageUrl;
+            resultImage.alt = found ? 'Верификация найдена' : 'Нет верификации';
+
+            if (found) {
+                resultStatus.className = 'result-status success';
+                statusText.textContent = 'Верификация действует';
+                statusText.style.color = '#00ff41';
+                resultDesc.textContent = `Данный ${type} ${username} был верифицирован от MrFeastProject.`;
+                resultBadge.className = 'result-badge';
+
+                if (ROLES[username]) {
+                    resultRole.style.display = 'inline-block';
+                    resultRole.innerHTML = `<i class="cf-icon cf-icon-robot"></i> ${ROLES[username]}`;
+                } else {
+                    resultRole.style.display = 'none';
+                }
+
+            } else {
+                resultStatus.className = 'result-status error';
+                statusText.textContent = 'Нету Верификации';
+                statusText.style.color = '#ff4444';
+                resultBadge.className = 'result-badge error';
+
+                if (wasExpired) {
+                    resultDesc.textContent = `Данный ${type} ${username} не имеет верификацию от MrFeastProject. Верификация истекла или была отозвана.`;
+                } else {
+                    resultDesc.textContent = `Данный ${type} ${username} не имеет верификацию от MrFeastProject. Мы настоятельно не рекомендуем использовать как либо этот источник.`;
+                }
+
+                resultRole.style.display = 'none';
+            }
+        }
+
+        async function checkVerification() {
+            try {
+                const response = await fetch(VERIFICATE_URL, {
+                    cache: 'no-store',
+                    signal: AbortSignal.timeout(8000)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Файл не найден на GitHub');
+                }
+
+                const data = await response.text();
+                const categories = parseList(data);
+
+                const found = categories[type]?.includes(username) || false;
+                const wasPreviouslyVerified = params.get('found') === 'true';
+                const wasExpired = wasPreviouslyVerified && !found;
+
+                showResult(found, type, username, wasExpired);
+
+            } catch (error) {
+                console.error('Ошибка загрузки списка:', error);
+
+                const urlFound = params.get('found') === 'true';
+
+                loadingState.classList.add('hidden');
+
+                if (urlFound) {
+                    resultState.classList.add('visible');
+                    resultImage.src = 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/Verification.png';
+                    resultStatus.className = 'result-status warning';
+                    statusText.textContent = '⚠️ Требуется проверка';
+                    statusText.style.color = '#ffaa00';
+                    resultDesc.textContent = `Не удалось проверить актуальность верификации для ${type} ${username}. Возможно, верификация истекла.`;
+                    resultBadge.className = 'result-badge warning';
+                    resultRole.style.display = 'none';
+                    resultBadge.textContent = '● Требуется обновление';
+
+                } else {
+                    errorState.classList.add('visible');
+                }
+            }
+        }
+
+        checkVerification();
+
+        console.log('✅ MrFeastProject | Проверка актуальности верификации');
     })();
 </script>
 
