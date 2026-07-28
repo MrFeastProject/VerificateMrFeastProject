@@ -11,6 +11,7 @@
 @MrFeastClicker_BOT
 @VerificationMrFeastProject_BOT
 @piar_wram_Bot
+@smm_halstarobot
 
 ==Telegram User==
 @MrFeast_Official
