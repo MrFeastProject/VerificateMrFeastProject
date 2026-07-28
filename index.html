@@ -48,9 +48,7 @@
             z-index: 0;
             background:
                 repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(0, 255, 65, 0.015) 30px, rgba(0, 255, 65, 0.015) 31px),
-                repeating-linear-gradient(-45deg, transparent, transparent 30px, rgba(0, 255, 65, 0.015) 30px, rgba(0, 255, 65, 0.015) 31px),
-                repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(0, 255, 65, 0.005) 60px, rgba(0, 255, 65, 0.005) 61px),
-                repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(0, 255, 65, 0.005) 60px, rgba(0, 255, 65, 0.005) 61px);
+                repeating-linear-gradient(-45deg, transparent, transparent 30px, rgba(0, 255, 65, 0.015) 30px, rgba(0, 255, 65, 0.015) 31px);
             pointer-events: none;
         }
 
@@ -83,9 +81,6 @@
         .bg-dot:nth-child(10) { left: 95%; top: 40%; animation-delay: 1.2s; width: 5px; height: 5px; }
         .bg-dot:nth-child(11) { left: 10%; top: 50%; animation-delay: 3s; }
         .bg-dot:nth-child(12) { left: 50%; top: 95%; animation-delay: 0.3s; }
-        .bg-dot:nth-child(13) { left: 70%; top: 10%; animation-delay: 1.7s; }
-        .bg-dot:nth-child(14) { left: 90%; top: 85%; animation-delay: 2.8s; }
-        .bg-dot:nth-child(15) { left: 30%; top: 45%; animation-delay: 0.9s; }
 
         @keyframes dotGlow {
             0% { opacity: 0.05; transform: scale(0.5); }
@@ -114,13 +109,13 @@
             inset: -1px;
             border-radius: 29px;
             padding: 1px;
-            background: linear-gradient(135deg, #00ff41, #007a20, #00ff41, #00cc33, #00ff41, #0088ff, #00ff41);
+            background: linear-gradient(135deg, #00ff41, #007a20, #00ff41, #00cc33, #00ff41);
             background-size: 400% 400%;
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             animation: borderGlow 8s ease-in-out infinite alternate;
-            opacity: 0.5;
+            opacity: 0.4;
             pointer-events: none;
             z-index: 0;
         }
@@ -138,8 +133,7 @@
             border-radius: 28px;
             background:
                 radial-gradient(ellipse at 20% 20%, rgba(0, 255, 65, 0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(0, 255, 65, 0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(0, 255, 200, 0.01) 0%, transparent 70%);
+                radial-gradient(ellipse at 80% 80%, rgba(0, 255, 65, 0.03) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
@@ -152,28 +146,41 @@
             position: relative;
             z-index: 2;
             min-height: 220px;
+            width: 100%;
         }
 
         .step.hidden {
             display: none;
         }
 
+        /* ===== ГРАДИЕНТНЫЙ ЗАГОЛОВОК (РАБОТАЕТ ВЕЗДЕ) ===== */
         .step-title {
             font-size: 1.4rem;
             font-weight: 600;
+            letter-spacing: 0.3px;
+            margin-bottom: 22px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 22px;
+            border-radius: 60px;
+            border: 1px solid rgba(0, 255, 65, 0.1);
             background: linear-gradient(135deg, #ccffcc, #00ff41, #66ff88);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: 0.3px;
-            margin-bottom: 22px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(0, 255, 65, 0.03);
-            padding: 6px 20px;
+            position: relative;
+        }
+
+        /* Фон под градиентом (прозрачный слой) */
+        .step-title::before {
+            content: '';
+            position: absolute;
+            inset: 0;
             border-radius: 60px;
-            border: 1px solid rgba(0, 255, 65, 0.06);
+            background: rgba(0, 255, 65, 0.05);
+            z-index: -1;
+            -webkit-text-fill-color: initial;
         }
 
         .step-title i {
@@ -465,27 +472,20 @@
         }
 
         @keyframes fadeInScale {
-            0% { opacity: 0; transform: scale(0.95) translateY(-10px); filter: blur(3px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+            0% { opacity: 0; transform: scale(0.95); filter: blur(3px); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0); }
         }
 
         .site-header {
             font-size: 2.2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #ccffcc, #00ff41, #66ff88, #00cc33);
-            background-size: 300% 300%;
+            background: linear-gradient(135deg, #ccffcc, #00ff41, #66ff88);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-shadow: 0 0 50px rgba(0, 255, 65, 0.15);
             letter-spacing: 1px;
             margin-bottom: 4px;
-            animation: gradientShift 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
         }
 
         .site-subheader {
@@ -711,6 +711,7 @@
         .form-group {
             margin-bottom: 16px;
             text-align: left;
+            position: relative;
         }
 
         .form-group label {
@@ -744,6 +745,32 @@
         .form-group select option {
             background: #0e130e;
             color: #c4ffc4;
+        }
+
+        .form-group .error-text {
+            display: none;
+            font-size: 0.75rem;
+            color: #ff4444;
+            margin-top: 4px;
+            padding-left: 4px;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            animation: errorSlide 0.3s ease-out;
+        }
+
+        @keyframes errorSlide {
+            0% { opacity: 0; transform: translateY(-4px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group .error-text.visible {
+            display: block;
+        }
+
+        .form-group.error select,
+        .form-group.error input {
+            border-color: #ff4444;
+            box-shadow: 0 0 20px rgba(255, 68, 68, 0.1);
         }
 
         .form-actions {
@@ -1016,9 +1043,6 @@
     <div class="bg-dot"></div>
     <div class="bg-dot"></div>
     <div class="bg-dot"></div>
-    <div class="bg-dot"></div>
-    <div class="bg-dot"></div>
-    <div class="bg-dot"></div>
 </div>
 
 <div class="container">
@@ -1126,7 +1150,7 @@
             <i class="cf-icon cf-icon-pen"></i> Отправка заявки
         </div>
         <form id="applicationForm">
-            <div class="form-group">
+            <div class="form-group" id="appTypeGroup">
                 <label for="contentType">Тип контента</label>
                 <select id="contentType" required>
                     <option value="">Выберите тип</option>
@@ -1135,10 +1159,12 @@
                     <option value="Бот">Бот</option>
                     <option value="Юзер">Юзер</option>
                 </select>
+                <div class="error-text" id="appTypeError">Пожалуйста, выберите тип контента</div>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="appUserGroup">
                 <label for="username">Юзернейм (канала/чата/бота/юзера)</label>
                 <input type="text" id="username" placeholder="@username" required />
+                <div class="error-text" id="appUserError">Юзернейм должен начинаться с @</div>
             </div>
             <div class="form-actions">
                 <button type="button" class="btn-secondary" id="closeModalBtn">Отмена</button>
@@ -1157,7 +1183,7 @@
             <i class="cf-icon cf-icon-search"></i> Verification Telegram Content
         </div>
         <form id="verifyForm">
-            <div class="form-group">
+            <div class="form-group" id="verifyTypeGroup">
                 <label for="verifyType">Контент</label>
                 <select id="verifyType" required>
                     <option value="">Выберите тип</option>
@@ -1166,10 +1192,12 @@
                     <option value="Бот">Бот</option>
                     <option value="Юзер">Юзер</option>
                 </select>
+                <div class="error-text" id="verifyTypeError">Пожалуйста, выберите тип контента</div>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="verifyUserGroup">
                 <label for="verifyUsername">Юзернейм</label>
                 <input type="text" id="verifyUsername" placeholder="@username" required />
+                <div class="error-text" id="verifyUserError">Юзернейм должен начинаться с @</div>
             </div>
             <div class="form-actions">
                 <button type="button" class="btn-secondary" id="closeVerifyBtn">Отмена</button>
@@ -1239,12 +1267,20 @@
         const applicationForm = document.getElementById('applicationForm');
         const contentType = document.getElementById('contentType');
         const usernameInput = document.getElementById('username');
+        const appTypeGroup = document.getElementById('appTypeGroup');
+        const appUserGroup = document.getElementById('appUserGroup');
+        const appTypeError = document.getElementById('appTypeError');
+        const appUserError = document.getElementById('appUserError');
 
         const verifyModal = document.getElementById('verifyModal');
         const closeVerifyBtn = document.getElementById('closeVerifyBtn');
         const verifyForm = document.getElementById('verifyForm');
         const verifyType = document.getElementById('verifyType');
         const verifyUsername = document.getElementById('verifyUsername');
+        const verifyTypeGroup = document.getElementById('verifyTypeGroup');
+        const verifyUserGroup = document.getElementById('verifyUserGroup');
+        const verifyTypeError = document.getElementById('verifyTypeError');
+        const verifyUserError = document.getElementById('verifyUserError');
         const verifyResult = document.getElementById('verifyResult');
         const resultImage = document.getElementById('resultImage');
         const resultTitle = document.getElementById('resultTitle');
@@ -1259,6 +1295,46 @@
         const notification = document.getElementById('notification');
 
         let verificationData = {};
+
+        function showError(group, errorEl, message) {
+            group.classList.add('error');
+            errorEl.textContent = message;
+            errorEl.classList.add('visible');
+        }
+
+        function hideError(group, errorEl) {
+            group.classList.remove('error');
+            errorEl.classList.remove('visible');
+        }
+
+        function clearAllErrors() {
+            hideError(appTypeGroup, appTypeError);
+            hideError(appUserGroup, appUserError);
+            hideError(verifyTypeGroup, verifyTypeError);
+            hideError(verifyUserGroup, verifyUserError);
+        }
+
+        function validateUsername(username, group, errorEl) {
+            if (!username.startsWith('@')) {
+                showError(group, errorEl, 'Юзернейм должен начинаться с @');
+                return false;
+            }
+            if (username.length < 2) {
+                showError(group, errorEl, 'Введите корректный юзернейм');
+                return false;
+            }
+            hideError(group, errorEl);
+            return true;
+        }
+
+        function validateType(value, group, errorEl) {
+            if (!value) {
+                showError(group, errorEl, 'Пожалуйста, выберите тип контента');
+                return false;
+            }
+            hideError(group, errorEl);
+            return true;
+        }
 
         // --------------------------------------------------------------
         // 1) Проверка подключения → капча
@@ -1342,6 +1418,8 @@
         openModalBtn.addEventListener('click', () => {
             modalOverlay.classList.add('visible');
             document.body.style.overflow = 'hidden';
+            clearAllErrors();
+            applicationForm.reset();
         });
 
         closeModalBtn.addEventListener('click', closeModal);
@@ -1352,35 +1430,24 @@
         function closeModal() {
             modalOverlay.classList.remove('visible');
             document.body.style.overflow = '';
+            clearAllErrors();
             applicationForm.reset();
-        }
-
-        function validateUsername(username) {
-            if (!username.startsWith('@')) {
-                alert('Юзернейм должен начинаться с @');
-                return false;
-            }
-            if (username.length < 2) {
-                alert('Введите корректный юзернейм');
-                return false;
-            }
-            return true;
         }
 
         applicationForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
+            clearAllErrors();
+
             const type = contentType.value;
-            let username = usernameInput.value.trim();
+            const username = usernameInput.value.trim();
 
-            if (!type || !username) {
-                alert('Пожалуйста, заполните все поля.');
-                return;
-            }
+            let isValid = true;
 
-            if (!validateUsername(username)) {
-                return;
-            }
+            if (!validateType(type, appTypeGroup, appTypeError)) isValid = false;
+            if (!validateUsername(username, appUserGroup, appUserError)) isValid = false;
+
+            if (!isValid) return;
 
             closeModal();
             notification.classList.add('visible');
@@ -1413,6 +1480,7 @@
             verifyModal.classList.add('visible');
             document.body.style.overflow = 'hidden';
             verifyResult.classList.remove('visible', 'success', 'error');
+            clearAllErrors();
             verifyForm.reset();
             verifySubmitBtn.disabled = false;
             verifySubmitBtn.innerHTML = '<i class="cf-icon cf-icon-checkmark"></i> Проверить';
@@ -1427,25 +1495,26 @@
             verifyModal.classList.remove('visible');
             document.body.style.overflow = '';
             verifyResult.classList.remove('visible', 'success', 'error');
+            clearAllErrors();
         }
 
         // --------------------------------------------------------------
-        // 6) Проверка верификации (только с GitHub)
+        // 6) Проверка верификации
         // --------------------------------------------------------------
         verifyForm.addEventListener('submit', async function(e) {
             e.preventDefault();
 
+            clearAllErrors();
+
             const type = verifyType.value;
-            let username = verifyUsername.value.trim();
+            const username = verifyUsername.value.trim();
 
-            if (!type || !username) {
-                alert('Пожалуйста, заполните все поля.');
-                return;
-            }
+            let isValid = true;
 
-            if (!validateUsername(username)) {
-                return;
-            }
+            if (!validateType(type, verifyTypeGroup, verifyTypeError)) isValid = false;
+            if (!validateUsername(username, verifyUserGroup, verifyUserError)) isValid = false;
+
+            if (!isValid) return;
 
             verifySubmitBtn.disabled = true;
             verifySubmitBtn.innerHTML = '<i class="cf-icon cf-icon-loading"></i> Загрузка...';
@@ -1505,15 +1574,15 @@
         });
 
         // --------------------------------------------------------------
-        // 7) Отображение результата с ролями
+        // 7) Отображение результата
         // --------------------------------------------------------------
         function showResult(found, type, username) {
             verifyResult.classList.add('visible');
 
             const roles = {
-                '@MrFeast_Official': { text: '👑 Владелец сайта', class: 'owner' },
-                '@MrFeast_Official2': { text: '👑 Владелец сайта', class: 'owner' },
-                '@VerificationMrFeastProject_BOT': { text: '🤖 Телеграмм бот — Перенаправление на сайт', class: 'bot' }
+                '@MrFeast_Official': { text: '👑 Владелец сайта' },
+                '@MrFeast_Official2': { text: '👑 Владелец сайта' },
+                '@VerificationMrFeastProject_BOT': { text: '🤖 Телеграмм бот — Перенаправление на сайт' }
             };
 
             if (found) {
@@ -1527,7 +1596,6 @@
 
                 if (roles[username]) {
                     resultRole.style.display = 'inline-block';
-                    resultRole.className = `result-role ${roles[username].class}`;
                     resultRole.textContent = roles[username].text;
                 } else {
                     resultRole.style.display = 'none';
@@ -1535,8 +1603,6 @@
 
                 openTgBtn.className = 'btn-primary';
                 openTgBtn.innerHTML = '<i class="cf-icon cf-icon-arrow-right"></i> Открыть';
-
-                // Показываем кнопку копирования только при успешной верификации
                 copyPreviewBtn.style.display = 'flex';
 
             } else {
@@ -1551,8 +1617,6 @@
 
                 openTgBtn.className = 'btn-danger';
                 openTgBtn.innerHTML = '<i class="cf-icon cf-icon-warning"></i> Открыть (небезопасно)';
-
-                // Скрываем кнопку копирования при неудачной верификации
                 copyPreviewBtn.style.display = 'none';
             }
 
@@ -1567,7 +1631,6 @@
             const data = verificationData;
             if (!data.username) return;
 
-            // Формируем URL для страницы-превью
             const baseUrl = window.location.origin + window.location.pathname.replace('index.html', '');
             const previewUrl = baseUrl + 'preview.html?' + new URLSearchParams({
                 type: data.type,
@@ -1575,9 +1638,7 @@
                 found: data.found ? 'true' : 'false'
             }).toString();
 
-            // Копируем ссылку
             navigator.clipboard.writeText(previewUrl).then(() => {
-                // Визуальный отклик
                 const originalText = copyPreviewBtn.innerHTML;
                 copyPreviewBtn.innerHTML = '<i class="cf-icon cf-icon-checkmark"></i> Скопировано!';
                 copyPreviewBtn.style.borderColor = '#00ff41';
@@ -1594,7 +1655,7 @@
         });
 
         // --------------------------------------------------------------
-        // 9) Кнопки "Открыть" и "Закрыть"
+        // 9) Кнопки
         // --------------------------------------------------------------
         openTgBtn.addEventListener('click', function() {
             const username = verificationData.username;
@@ -1609,9 +1670,9 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        console.log('✅ MrFeastProject | Верификация с GitHub и превью');
+        console.log('✅ MrFeastProject | Верификация с GitHub');
     })();
 </script>
 
 </body>
-    </html>
+</html>
