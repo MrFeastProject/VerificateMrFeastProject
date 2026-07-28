@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Верификация | MrFeastProject</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cloudflare-icons/2.3.4/cloudflare-icons.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #090d09;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            padding: 16px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(0, 255, 65, 0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 255, 65, 0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 100%, rgba(0, 255, 65, 0.03) 0%, transparent 50%);
+            animation: bgPulse 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.05); }
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background:
+                repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(0, 255, 65, 0.015) 30px, rgba(0, 255, 65, 0.015) 31px),
+                repeating-linear-gradient(-45deg, transparent, transparent 30px, rgba(0, 255, 65, 0.015) 30px, rgba(0, 255, 65, 0.015) 31px);
+            pointer-events: none;
+        }
+
+        .bg-dots {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-dot {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(0, 255, 65, 0.08);
+            border-radius: 50%;
+            animation: dotGlow 6s ease-in-out infinite alternate;
+        }
+
+        .bg-dot:nth-child(1) { left: 5%; top: 10%; animation-delay: 0s; }
+        .bg-dot:nth-child(2) { left: 15%; top: 30%; animation-delay: 1s; width: 5px; height: 5px; }
+        .bg-dot:nth-child(3) { left: 25%; top: 70%; animation-delay: 2s; }
+        .bg-dot:nth-child(4) { left: 35%; top: 90%; animation-delay: 0.5s; width: 4px; height: 4px; }
+        .bg-dot:nth-child(5) { left: 45%; top: 15%; animation-delay: 1.5s; }
+        .bg-dot:nth-child(6) { left: 55%; top: 55%; animation-delay: 2.5s; width: 6px; height: 6px; }
+        .bg-dot:nth-child(7) { left: 65%; top: 80%; animation-delay: 0.8s; }
+        .bg-dot:nth-child(8) { left: 75%; top: 25%; animation-delay: 1.8s; width: 4px; height: 4px; }
+        .bg-dot:nth-child(9) { left: 85%; top: 60%; animation-delay: 2.2s; }
+        .bg-dot:nth-child(10) { left: 95%; top: 40%; animation-delay: 1.2s; width: 5px; height: 5px; }
+        .bg-dot:nth-child(11) { left: 10%; top: 50%; animation-delay: 3s; }
+        .bg-dot:nth-child(12) { left: 50%; top: 95%; animation-delay: 0.3s; }
+
+        @keyframes dotGlow {
+            0% { opacity: 0.05; transform: scale(0.5); }
+            100% { opacity: 0.2; transform: scale(1.5); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 600px;
+            background: rgba(14, 19, 14, 0.92);
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 40px 32px 44px;
+            border: 1px solid rgba(30, 51, 30, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 60px rgba(0, 255, 65, 0.03);
+            overflow: hidden;
+            transition: 0.3s;
+            min-height: 400px;
+            text-align: center;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 29px;
+            padding: 1px;
+            background: linear-gradient(135deg, #00ff41, #007a20, #00ff41, #00cc33, #00ff41);
+            background-size: 400% 400%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderGlow 8s ease-in-out infinite alternate;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes borderGlow {
+            0% { background-position: 0% 50%; opacity: 0.2; }
+            50% { opacity: 0.5; }
+            100% { background-position: 100% 50%; opacity: 0.3; }
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(0, 255, 65, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0, 255, 65, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .preview-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            animation: fadeInScale 0.6s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.95) translateY(-10px); filter: blur(3px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        }
+
+        .preview-header {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ccffcc, #00ff41, #66ff88, #00cc33);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 50px rgba(0, 255, 65, 0.15);
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            animation: gradientShift 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .preview-image {
+            width: 100%;
+            max-width: 180px;
+            height: auto;
+            margin: 8px auto;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .preview-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #c4ffc4, #00ff41);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
+        }
+
+        .preview-status {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .preview-status.success {
+            color: #00ff41;
+        }
+
+        .preview-status.error {
+            color: #ff4444;
+        }
+
+        .preview-status i {
+            margin-right: 8px;
+        }
+
+        .preview-desc {
+            color: #8fbf8f;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-width: 400px;
+        }
+
+        .preview-role {
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: inline-block;
+            background: linear-gradient(135deg, #c4ffc4, #00ff41);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border: 1px solid rgba(0, 255, 65, 0.15);
+        }
+
+        .preview-role i {
+            -webkit-text-fill-color: initial;
+            color: #00ff41;
+            margin-right: 8px;
+        }
+
+        .preview-badge {
+            display: inline-block;
+            background: rgba(0, 255, 65, 0.06);
+            border: 1px solid rgba(0, 255, 65, 0.1);
+            border-radius: 60px;
+            padding: 4px 16px;
+            font-size: 0.7rem;
+            color: #6f9f6f;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .preview-error {
+            color: #ff4444;
+            border-color: #ff4444;
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 28px 16px 32px; }
+            .preview-header { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-dots">
+    <div class="bg-dot"></div>
+    <div class="bg-dot"></div>
+    <div class="bg-dot"></div>
+    <div class="bg-dot"></div>
+    <div class="bg-dot"></div>
+    <div class="bg-dot"></div>
+    <div class="bg-dot"></div>
+    <div class="bg-dot"></div>
+    <div class="bg-dot"></div>
+    <div class="bg-dot"></div>
+    <div class="bg-dot"></div>
+    <div class="bg-dot"></div>
+</div>
+
+<div class="container">
+    <div class="preview-content" id="previewContent">
+        <!-- Загружается через JavaScript из URL-параметров -->
+    </div>
+</div>
+
+<script>
+    (function() {
+        const previewContent = document.getElementById('previewContent');
+
+        // Получаем параметры из URL
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type') || 'не указан';
+        const username = params.get('username') || 'не указан';
+        const found = params.get('found') === 'true';
+
+        // Роли
+        const roles = {
+            '@MrFeast_Official': '👑 Владелец сайта',
+            '@MrFeast_Official2': '👑 Владелец сайта',
+            '@VerificationMrFeastProject_BOT': '🤖 Телеграмм бот — Перенаправление на сайт'
+        };
+
+        const imageUrl = found
+            ? 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/Verification.png'
+            : 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/NoVerification.png';
+
+        const statusClass = found ? 'success' : 'error';
+        const statusText = found ? 'Верификация действует' : 'Нету Верификации';
+        const statusIcon = found ? 'cf-icon-checkmark-circle' : 'cf-icon-close-circle';
+
+        let descText = found
+            ? `Данный ${type} ${username} был верифицирован от MrFeastProject.`
+            : `Данный ${type} ${username} не имеет верификацию от MrFeastProject. Мы настоятельно не рекомендуем использовать как либо этот источник.`;
+
+        let roleHtml = '';
+        if (found && roles[username]) {
+            roleHtml = `<div class="preview-role"><i class="cf-icon cf-icon-robot"></i> ${roles[username]}</div>`;
+        }
+
+        previewContent.innerHTML = `
+            <div class="preview-header">✓ Verification MrFeastProject</div>
+            <img class="preview-image" src="${imageUrl}" alt="Результат верификации" />
+            <div class="preview-title">Verification Telegram Content</div>
+            <div class="preview-status ${statusClass}">
+                <i class="cf-icon ${statusIcon}"></i> ${statusText}
+            </div>
+            <div class="preview-desc">${descText}</div>
+            ${roleHtml}
+            <div class="preview-badge">● Верификация MrFeastProject</div>
+        `;
+
+        console.log('✅ Страница-превью загружена');
+    })();
+</script>
+
+</body>
+</html>
