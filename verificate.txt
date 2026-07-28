@@ -10,6 +10,7 @@
 ==Telegram Bot==
 @MrFeastClicker_BOT
 @VerificationMrFeastProject_BOT
+@piar_wram_Bot
 
 ==Telegram User==
 @MrFeast_Official
