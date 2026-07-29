@@ -371,13 +371,13 @@
 
     <div class="loading-state" id="loadingState">
         <div class="spinner-big"></div>
-        <div class="loading-text">Проверка верификации...</div>
+        <div class="loading-text">Проверка актуальности верификации...</div>
     </div>
 
     <div class="result-state" id="resultState">
         <div class="result-header">✓ Verification MrFeastProject</div>
         <img class="result-image" id="resultImage" src="" alt="Результат" />
-        <div class="result-title" id="resultTitle">Verification Telegram Content</div>
+        <div class="result-title" id="resultTitle">Verification Content</div>
         <div class="result-status" id="resultStatus">
             <i class="cf-icon cf-icon-checkmark-circle"></i> <span id="statusText">Загрузка...</span>
         </div>
@@ -415,23 +415,24 @@
         const ROLES = {
             '@MrFeast_Official': '👑 Владелец сайта',
             '@MrFeast_Official2': '👑 Владелец сайта',
+            '@MrFeastProjectVerificatedManager': '👑 Manager',
             '@VerificationMrFeastProject_BOT': '🤖 Телеграмм бот — Перенаправление на сайт'
         };
 
         const VERIFICATE_URL = 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/verificate.txt';
+        const YOUTUBE_URL = 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/YouTube.txt';
 
         const params = new URLSearchParams(window.location.search);
         const type = params.get('type') || 'не указан';
         const username = params.get('username') || 'не указан';
+        const url = params.get('url') || '';
+        const initialFound = params.get('found') === 'true';
 
-        function parseList(data) {
+        function parseTelegramList(data) {
             const categories = {
-                'Канал': [],
-                'Чат': [],
-                'Бот': [],
-                'Юзер': []
+                'Канал': [], 'Чат': [], 'Бот': [], 'Юзер': [],
+                'Telegram канал': [], 'Telegram чат': [], 'Telegram бот': [], 'Telegram профиль': []
             };
-
             let currentCategory = null;
             const lines = data.split('\n');
 
@@ -446,10 +447,31 @@
                 }
                 if (line && currentCategory && line.startsWith('@')) {
                     categories[currentCategory].push(line);
+                    // Дублируем в новые форматы названий для совместимости
+                    if (currentCategory === 'Канал') categories['Telegram канал'].push(line);
+                    if (currentCategory === 'Чат') categories['Telegram чат'].push(line);
+                    if (currentCategory === 'Бот') categories['Telegram бот'].push(line);
+                    if (currentCategory === 'Юзер') categories['Telegram профиль'].push(line);
                 }
             }
-
             return categories;
+        }
+
+        function parseYouTubeList(data) {
+            const channels = [];
+            let currentCategory = null;
+            const lines = data.split('\n');
+            for (let line of lines) {
+                line = line.trim();
+                if (line.startsWith('==YouTube')) {
+                    if (line.includes('Channel')) currentCategory = 'Channel';
+                    continue;
+                }
+                if (line && currentCategory === 'Channel' && line.startsWith('https://')) {
+                    channels.push(line);
+                }
+            }
+            return channels;
         }
 
         function showResult(found, type, username, wasExpired) {
@@ -462,6 +484,7 @@
 
             resultImage.src = imageUrl;
             resultImage.alt = found ? 'Верификация найдена' : 'Нет верификации';
+            resultTitle.textContent = type.includes('YouTube') ? 'Verification YouTube Channel' : 'Verification Telegram Content';
 
             if (found) {
                 resultStatus.className = 'result-status success';
@@ -495,32 +518,33 @@
 
         async function checkVerification() {
             try {
-                const response = await fetch(VERIFICATE_URL, {
-                    cache: 'no-store',
-                    signal: AbortSignal.timeout(8000)
-                });
-
-                if (!response.ok) {
-                    throw new Error('Файл не найден на GitHub');
+                let found = initialFound;
+                
+                if (type.includes('YouTube')) {
+                    const response = await fetch(YOUTUBE_URL, { cache: 'no-store', signal: AbortSignal.timeout(8000) });
+                    if (response.ok) {
+                        const data = await response.text();
+                        const channels = parseYouTubeList(data);
+                        const target = url || username;
+                        found = channels.includes(target);
+                    }
+                } else {
+                    const response = await fetch(VERIFICATE_URL, { cache: 'no-store', signal: AbortSignal.timeout(8000) });
+                    if (response.ok) {
+                        const data = await response.text();
+                        const categories = parseTelegramList(data);
+                        found = categories[type]?.includes(username) || false;
+                    }
                 }
 
-                const data = await response.text();
-                const categories = parseList(data);
-
-                const found = categories[type]?.includes(username) || false;
-                const wasPreviouslyVerified = params.get('found') === 'true';
-                const wasExpired = wasPreviouslyVerified && !found;
-
+                const wasExpired = initialFound && !found;
                 showResult(found, type, username, wasExpired);
 
             } catch (error) {
                 console.error('Ошибка загрузки списка:', error);
-
-                const urlFound = params.get('found') === 'true';
-
                 loadingState.classList.add('hidden');
 
-                if (urlFound) {
+                if (initialFound) {
                     resultState.classList.add('visible');
                     resultImage.src = 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/Verification.png';
                     resultStatus.className = 'result-status warning';
@@ -530,7 +554,6 @@
                     resultBadge.className = 'result-badge warning';
                     resultRole.style.display = 'none';
                     resultBadge.textContent = '● Требуется обновление';
-
                 } else {
                     errorState.classList.add('visible');
                 }
@@ -538,8 +561,7 @@
         }
 
         checkVerification();
-
-        console.log('✅ MrFeastProject | Проверка актуальности верификации');
+        console.log('✅ MrFeastProject | Проверка актуальности верификации (Preview)');
     })();
 </script>
 
