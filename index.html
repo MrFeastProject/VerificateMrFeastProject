@@ -23,7 +23,6 @@
             position: relative;
             overflow-x: hidden;
             overflow-y: auto;
-            transition: background 0.5s ease;
         }
 
         /* ===== ТРЕВОГА ===== */
@@ -61,7 +60,6 @@
                 radial-gradient(ellipse at 80% 80%, rgba(255, 0, 0, 0.08) 0%, transparent 50%) !important;
         }
 
-        /* Баннер тревоги */
         .alert-banner {
             display: none;
             position: relative;
@@ -102,89 +100,6 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            background:
-                radial-gradient(ellipse at 20% 50%, rgba(0, 255, 65, 0.04) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 50%, rgba(0, 255, 65, 0.04) 0%, transparent 60%),
-                radial-gradient(ellipse at 50% 100%, rgba(0, 255, 65, 0.03) 0%, transparent 50%);
-            animation: bgPulse 8s ease-in-out infinite alternate;
-            transition: background 0.5s ease;
-        }
-
-        body.alert-mode::before {
-            background:
-                radial-gradient(ellipse at 20% 50%, rgba(255, 0, 0, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 50%, rgba(255, 0, 0, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 50% 100%, rgba(255, 0, 0, 0.05) 0%, transparent 50%) !important;
-        }
-
-        @keyframes bgPulse {
-            0% { opacity: 0.5; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.05); }
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            background:
-                repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(0, 255, 65, 0.015) 30px, rgba(0, 255, 65, 0.015) 31px),
-                repeating-linear-gradient(-45deg, transparent, transparent 30px, rgba(0, 255, 65, 0.015) 30px, rgba(0, 255, 65, 0.015) 31px);
-            pointer-events: none;
-            transition: background 0.5s ease;
-        }
-
-        body.alert-mode::after {
-            background:
-                repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255, 0, 0, 0.03) 30px, rgba(255, 0, 0, 0.03) 31px),
-                repeating-linear-gradient(-45deg, transparent, transparent 30px, rgba(255, 0, 0, 0.03) 30px, rgba(255, 0, 0, 0.03) 31px) !important;
-        }
-
-        .bg-dots {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .bg-dot {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(0, 255, 65, 0.08);
-            border-radius: 50%;
-            animation: dotGlow 6s ease-in-out infinite alternate;
-            transition: background 0.5s ease;
-        }
-
-        body.alert-mode .bg-dot {
-            background: rgba(255, 0, 0, 0.15) !important;
-        }
-
-        .bg-dot:nth-child(1) { left: 5%; top: 10%; animation-delay: 0s; }
-        .bg-dot:nth-child(2) { left: 15%; top: 30%; animation-delay: 1s; width: 5px; height: 5px; }
-        .bg-dot:nth-child(3) { left: 25%; top: 70%; animation-delay: 2s; }
-        .bg-dot:nth-child(4) { left: 35%; top: 90%; animation-delay: 0.5s; width: 4px; height: 4px; }
-        .bg-dot:nth-child(5) { left: 45%; top: 15%; animation-delay: 1.5s; }
-        .bg-dot:nth-child(6) { left: 55%; top: 55%; animation-delay: 2.5s; width: 6px; height: 6px; }
-        .bg-dot:nth-child(7) { left: 65%; top: 80%; animation-delay: 0.8s; }
-        .bg-dot:nth-child(8) { left: 75%; top: 25%; animation-delay: 1.8s; width: 4px; height: 4px; }
-        .bg-dot:nth-child(9) { left: 85%; top: 60%; animation-delay: 2.2s; }
-        .bg-dot:nth-child(10) { left: 95%; top: 40%; animation-delay: 1.2s; width: 5px; height: 5px; }
-        .bg-dot:nth-child(11) { left: 10%; top: 50%; animation-delay: 3s; }
-        .bg-dot:nth-child(12) { left: 50%; top: 95%; animation-delay: 0.3s; }
-
-        @keyframes dotGlow {
-            0% { opacity: 0.05; transform: scale(0.5); }
-            100% { opacity: 0.2; transform: scale(1.5); }
-        }
-
         .container {
             position: relative;
             z-index: 1;
@@ -195,9 +110,8 @@
             border-radius: 24px;
             padding: 28px 20px 32px;
             border: 1px solid rgba(30, 51, 30, 0.5);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 60px rgba(0, 255, 65, 0.03);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
             overflow: visible;
-            transition: all 0.5s ease;
             min-height: auto;
         }
 
@@ -216,7 +130,6 @@
             opacity: 0.4;
             pointer-events: none;
             z-index: 0;
-            transition: all 0.5s ease;
         }
 
         @keyframes borderGlow {
@@ -236,13 +149,11 @@
                 radial-gradient(ellipse at 50% 50%, rgba(0, 255, 200, 0.01) 0%, transparent 70%);
             pointer-events: none;
             z-index: 0;
-            transition: background 0.5s ease;
         }
 
-        /* ===== СТАТИСТИКА ===== */
         .stats-bar {
             display: flex;
-            justify-content: space-evenly; /* Исправлено для равномерного распределения */
+            justify-content: space-evenly;
             align-items: center;
             padding: 8px 0 14px;
             border-bottom: 1px solid rgba(0, 255, 65, 0.06);
@@ -253,9 +164,9 @@
 
         .stat-item {
             text-align: center;
-            padding: 2px 16px; /* Увеличены боковые отступы */
+            padding: 2px 16px;
             flex: 1;
-            min-width: 75px; /* Увеличена минимальная ширина */
+            min-width: 75px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -281,7 +192,6 @@
             white-space: nowrap;
         }
 
-        /* ===== ШАПКА ===== */
         .header {
             display: flex;
             align-items: center;
@@ -308,7 +218,6 @@
             font-size: 1.2rem;
             color: #090d09;
             font-weight: 800;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.15);
             flex-shrink: 0;
         }
 
@@ -350,7 +259,6 @@
             font-size: 0.7rem;
         }
 
-        /* ===== ЭТАПЫ ===== */
         .step {
             display: flex;
             flex-direction: column;
@@ -379,7 +287,6 @@
             border-radius: 60px;
             border: 1px solid rgba(0, 255, 65, 0.1);
             background: rgba(0, 255, 65, 0.05);
-            transition: all 0.5s ease;
         }
 
         .step-title i {
@@ -400,8 +307,7 @@
             border: 3px solid #1a2e1a;
             border-top: 3px solid #00ff41;
             border-radius: 50%;
-            animation: spin 0.8s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-            box-shadow: 0 0 24px rgba(0, 255, 65, 0.08);
+            animation: spin 0.8s linear infinite;
         }
 
         @keyframes spin {
@@ -417,7 +323,6 @@
             border-radius: 50%;
             margin: 0 2px;
             animation: dotPulse 1.4s infinite alternate;
-            box-shadow: 0 0 10px #00ff41;
         }
 
         .dots span:nth-child(2) { animation-delay: 0.3s; }
@@ -468,17 +373,10 @@
             padding: 14px 16px 16px;
             border-radius: 14px;
             border: 1px solid #1f3a1f;
-            box-shadow: inset 0 0 30px rgba(0, 255, 65, 0.01);
-            transition: 0.3s;
         }
 
         .captcha-wrapper.visible {
             display: flex;
-        }
-
-        .captcha-wrapper:hover {
-            border-color: #2b5a2b;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.04);
         }
 
         .captcha-header {
@@ -533,7 +431,6 @@
             width: 100%;
             height: 2px;
             background: linear-gradient(90deg, transparent, #00ff41, transparent);
-            box-shadow: 0 0 20px #00ff41, 0 0 60px rgba(0, 255, 65, 0.2);
             animation: scanMove 1.8s ease-in-out infinite;
         }
 
@@ -585,7 +482,6 @@
         .captcha-check-row input[type="checkbox"]:checked {
             background: #00ff41;
             border-color: #00ff41;
-            box-shadow: 0 0 16px #00ff41;
         }
 
         .captcha-check-row input[type="checkbox"]:checked::after {
@@ -616,8 +512,6 @@
             font-size: 1rem;
             font-weight: 550;
             color: #00ff41;
-            text-shadow: 0 0 20px rgba(0, 255, 65, 0.15);
-            letter-spacing: 0.5px;
             margin-top: 2px;
         }
 
@@ -634,7 +528,6 @@
         .redirect-text span {
             font-weight: 700;
             color: #00ff41;
-            text-shadow: 0 0 20px #00ff41;
             font-size: 1.1rem;
         }
 
@@ -645,7 +538,6 @@
             border-radius: 20px;
             margin-top: 12px;
             overflow: hidden;
-            box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.7);
         }
 
         .progress-fill {
@@ -653,11 +545,9 @@
             width: 100%;
             background: linear-gradient(90deg, #00cc33, #66ff88);
             border-radius: 20px;
-            box-shadow: 0 0 24px #00ff41;
             transition: width 0.08s linear;
         }
 
-        /* ===== ОСНОВНОЙ САЙТ ===== */
         .verification-site {
             display: none;
             flex-direction: column;
@@ -670,34 +560,20 @@
 
         .verification-site.visible {
             display: flex;
-            animation: fadeInScale 0.5s ease-out;
-        }
-
-        @keyframes fadeInScale {
-            0% { opacity: 0; transform: scale(0.95); filter: blur(3px); }
-            100% { opacity: 1; transform: scale(1); filter: blur(0); }
         }
 
         .site-header {
             font-size: 1.8rem;
             font-weight: 700;
             background: linear-gradient(135deg, #ccffcc, #00ff41, #66ff88, #00cc33);
-            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 50px rgba(0, 255, 65, 0.15);
             letter-spacing: 1px;
             margin-bottom: 2px;
-            animation: gradientShift 4s ease-in-out infinite alternate;
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
         }
 
         .site-subheader {
@@ -746,7 +622,6 @@
         .btn-nav:hover {
             background: linear-gradient(135deg, rgba(0, 255, 65, 0.15), rgba(0, 255, 65, 0.05));
             border-color: #00ff41;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.08);
             color: #c4ffc4;
             transform: translateY(-2px);
         }
@@ -756,14 +631,12 @@
             font-size: 0.9rem;
         }
 
-        /* ===== КАРТОЧКИ ===== */
         .info-cards {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
             width: 100%;
             margin-bottom: 20px;
-            scroll-margin-top: 16px;
         }
 
         @media (max-width: 480px) {
@@ -780,13 +653,10 @@
             padding: 14px 14px;
             text-align: left;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
 
         .info-card:hover {
             border-color: #2b5a2b;
-            box-shadow: 0 0 40px rgba(0, 255, 65, 0.04);
             transform: translateY(-2px);
         }
 
@@ -810,7 +680,6 @@
             font-weight: 400;
         }
 
-        /* ===== ПАРТНЁРЫ ===== */
         .partners {
             display: flex;
             justify-content: center;
@@ -838,7 +707,6 @@
             font-size: 0.7rem;
         }
 
-        /* ===== КНОПКИ ===== */
         .btn-primary {
             background: linear-gradient(135deg, #00cc33, #00ff41);
             color: #090d09;
@@ -853,14 +721,12 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.15);
             font-family: inherit;
             letter-spacing: 0.5px;
         }
 
         .btn-primary:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 50px rgba(0, 255, 65, 0.25);
         }
 
         .btn-primary:active {
@@ -871,7 +737,6 @@
             font-size: 1rem;
         }
 
-        /* ===== КНОПКА DANGER (КРАСНЫЙ ГРАДИЕНТ) ===== */
         .btn-danger {
             background: linear-gradient(135deg, #cc3333, #ff4444);
             color: #fff;
@@ -887,19 +752,12 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            box-shadow: 0 0 30px rgba(255, 68, 68, 0.15);
         }
 
         .btn-danger:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 50px rgba(255, 68, 68, 0.25);
         }
 
-        .btn-danger i {
-            font-size: 0.9rem;
-        }
-
-        /* ===== КНОПКА COPY ===== */
         .btn-copy {
             background: linear-gradient(135deg, rgba(0, 255, 65, 0.08), rgba(0, 255, 65, 0.02));
             backdrop-filter: blur(10px);
@@ -921,16 +779,13 @@
         .btn-copy:hover {
             background: linear-gradient(135deg, rgba(0, 255, 65, 0.15), rgba(0, 255, 65, 0.05));
             border-color: #00ff41;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.08);
             color: #c4ffc4;
-            transform: translateY(-2px);
         }
 
         .btn-copy i {
             color: #00ff41;
         }
 
-        /* ===== МОДАЛКИ ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -941,16 +796,10 @@
             align-items: center;
             justify-content: center;
             padding: 16px;
-            animation: fadeIn 0.3s ease-out;
         }
 
         .modal-overlay.visible {
             display: flex;
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
         }
 
         .modal {
@@ -961,15 +810,9 @@
             padding: 24px 20px 22px;
             max-width: 440px;
             width: 100%;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 255, 65, 0.03);
-            animation: modalSlide 0.3s ease-out;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
             max-height: 90vh;
             overflow-y: auto;
-        }
-
-        @keyframes modalSlide {
-            0% { transform: translateY(16px) scale(0.96); opacity: 0; }
-            100% { transform: translateY(0) scale(1); opacity: 1; }
         }
 
         .modal-title {
@@ -1014,19 +857,12 @@
             color: #c4ffc4;
             font-size: 0.85rem;
             font-family: inherit;
-            transition: 0.3s;
             outline: none;
         }
 
         .form-group select:focus,
         .form-group input:focus {
             border-color: #00ff41;
-            box-shadow: 0 0 16px rgba(0, 255, 65, 0.05);
-        }
-
-        .form-group select option {
-            background: #0e130e;
-            color: #c4ffc4;
         }
 
         .form-group .error-text {
@@ -1034,15 +870,6 @@
             font-size: 0.7rem;
             color: #ff4444;
             margin-top: 3px;
-            padding-left: 4px;
-            font-weight: 400;
-            letter-spacing: 0.2px;
-            animation: errorSlide 0.3s ease-out;
-        }
-
-        @keyframes errorSlide {
-            0% { opacity: 0; transform: translateY(-4px); }
-            100% { opacity: 1; transform: translateY(0); }
         }
 
         .form-group .error-text.visible {
@@ -1052,7 +879,6 @@
         .form-group.error select,
         .form-group.error input {
             border-color: #ff4444;
-            box-shadow: 0 0 16px rgba(255, 68, 68, 0.1);
         }
 
         .form-actions {
@@ -1095,7 +921,6 @@
             font-size: 0.75rem;
             font-weight: 500;
             cursor: pointer;
-            transition: 0.3s;
             font-family: inherit;
         }
 
@@ -1104,7 +929,6 @@
             color: #c4ffc4;
         }
 
-        /* ===== РЕЗУЛЬТАТ ===== */
         .verify-result {
             margin-top: 14px;
             padding: 16px;
@@ -1115,31 +939,16 @@
 
         .verify-result.visible {
             display: block;
-            animation: fadeInScale 0.4s ease-out;
         }
 
         .verify-result.success {
             border: 2px solid #00ff41;
             background: rgba(0, 255, 65, 0.06);
-            box-shadow: 0 0 40px rgba(0, 255, 65, 0.05);
         }
 
         .verify-result.error {
             border: 2px solid #ff4444;
             background: rgba(255, 68, 68, 0.06);
-            box-shadow: 0 0 40px rgba(255, 68, 68, 0.05);
-        }
-
-        .verify-result.alert {
-            border: 2px solid rgba(255, 50, 50, 0.3);
-            background: rgba(255, 0, 0, 0.03);
-            animation: alertResultPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes alertResultPulse {
-            0% { border-color: rgba(255, 50, 50, 0.15); box-shadow: 0 0 20px rgba(255, 0, 0, 0.02); }
-            50% { border-color: rgba(255, 50, 50, 0.45); box-shadow: 0 0 50px rgba(255, 0, 0, 0.08); }
-            100% { border-color: rgba(255, 50, 50, 0.15); box-shadow: 0 0 20px rgba(255, 0, 0, 0.02); }
         }
 
         .verify-result .result-image {
@@ -1175,17 +984,6 @@
             color: #ff4444;
         }
 
-        .verify-result.alert .result-status {
-            color: #ff3333;
-            animation: alertTextPulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes alertTextPulse {
-            0% { opacity: 0.7; }
-            50% { opacity: 1; }
-            100% { opacity: 0.7; }
-        }
-
         .verify-result .result-status i {
             margin-right: 6px;
         }
@@ -1195,10 +993,6 @@
             font-size: 0.82rem;
             line-height: 1.5;
             margin-bottom: 6px;
-        }
-
-        .verify-result.alert .result-desc {
-            color: #ff9999 !important;
         }
 
         .verify-result .result-role {
@@ -1230,7 +1024,6 @@
             font-size: 0.75rem;
         }
 
-        /* ===== СТАТИСТИКА ===== */
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1290,7 +1083,6 @@
             margin-top: 4px;
         }
 
-        /* ===== УВЕДОМЛЕНИЕ ===== */
         .notification {
             display: none;
             position: fixed;
@@ -1316,7 +1108,6 @@
             max-width: 380px;
             width: 100%;
             text-align: center;
-            animation: modalSlide 0.3s ease-out;
         }
 
         .notification-box .icon-big {
@@ -1347,11 +1138,52 @@
             border: 3px solid #1a2e1a;
             border-top: 3px solid #00ff41;
             border-radius: 50%;
-            animation: spin 0.8s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            animation: spin 0.8s linear infinite;
             margin: 14px auto 6px;
         }
 
-        /* ===== АДАПТИВ ===== */
+        .platform-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .btn-platform {
+            padding: 16px;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-platform:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-telegram {
+            background: linear-gradient(135deg, #0088cc, #0099ff);
+            color: #fff;
+        }
+
+        .btn-youtube {
+            background: linear-gradient(135deg, #cc0000, #ff0000);
+            color: #fff;
+        }
+
+        .btn-platform svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
         @media (max-width: 480px) {
             .container { padding: 16px 12px 20px; }
             .step-title { font-size: 1rem; padding: 4px 12px; }
@@ -1375,7 +1207,6 @@
                 width: 100%;
                 justify-content: center;
             }
-            .alert-banner { font-size: 0.7rem; padding: 8px 12px; }
         }
 
         @media (max-width: 380px) {
@@ -1389,94 +1220,41 @@
 </head>
 <body>
 
-<div class="bg-dots">
-    <div class="bg-dot"></div>
-    <div class="bg-dot"></div>
-    <div class="bg-dot"></div>
-    <div class="bg-dot"></div>
-    <div class="bg-dot"></div>
-    <div class="bg-dot"></div>
-    <div class="bg-dot"></div>
-    <div class="bg-dot"></div>
-    <div class="bg-dot"></div>
-    <div class="bg-dot"></div>
-    <div class="bg-dot"></div>
-    <div class="bg-dot"></div>
-</div>
-
 <div class="container" id="mainContainer">
-
-    <!-- Баннер тревоги -->
     <div class="alert-banner" id="alertBanner">
         <i class="cf-icon cf-icon-warning"></i> ОБНАРУЖЕНА ПЛОХАЯ РЕПУТАЦИЯ
     </div>
 
-    <!-- ===== СТАТИСТИКА ===== -->
     <div class="stats-bar">
-        <div class="stat-item">
-            <div class="stat-number" id="totalVerified">0</div>
-            <div class="stat-label">Верифицировано</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">99.8%</div>
-            <div class="stat-label">Надёжность</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">4</div>
-            <div class="stat-label">Типа контента</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">24/7</div>
-            <div class="stat-label">Проверка</div>
-        </div>
+        <div class="stat-item"><div class="stat-number" id="totalVerified">0</div><div class="stat-label">Верифицировано</div></div>
+        <div class="stat-item"><div class="stat-number" id="totalChannels">0</div><div class="stat-label">Каналов</div></div>
+        <div class="stat-item"><div class="stat-number">99.8%</div><div class="stat-label">Надёжность</div></div>
+        <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Проверка</div></div>
     </div>
 
-    <!-- ===== ШАПКА ===== -->
     <div class="header">
         <div class="logo">
             <div class="logo-icon">
-                <!-- Встроенная SVG галочка для гарантированного отображения -->
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
             </div>
-            <div class="logo-text">
-                MrFeastProject
-                <small>Верификация</small>
-            </div>
+            <div class="logo-text">MrFeastProject<small>Верификация</small></div>
         </div>
-        <div class="header-badge">
-            <i class="cf-icon cf-icon-checkmark-circle"></i> Secure
-        </div>
+        <div class="header-badge"><i class="cf-icon cf-icon-checkmark-circle"></i> Secure</div>
     </div>
 
-    <!-- ===== ЭТАП 1 ===== -->
     <div id="step1" class="step">
-        <div class="step-title">
-            <i class="cf-icon cf-icon-wifi"></i> Проверка подключения
-        </div>
+        <div class="step-title"><i class="cf-icon cf-icon-wifi"></i> Проверка подключения</div>
         <div class="loader" id="loader1">
             <div class="spinner"></div>
-            <div class="dots">
-                <span></span><span></span><span></span>
-            </div>
+            <div class="dots"><span></span><span></span><span></span></div>
         </div>
-
         <div class="status-box">
-            <div class="status-text" id="statusText">
-                <i class="cf-icon cf-icon-connection"></i> Ожидание...
-            </div>
+            <div class="status-text" id="statusText"><i class="cf-icon cf-icon-connection"></i> Ожидание...</div>
         </div>
-
         <div class="captcha-wrapper" id="captchaWrapper">
             <div class="captcha-header">
-                <div class="captcha-icon">
-                    <i class="cf-icon cf-icon-security"></i>
-                </div>
-                <div class="captcha-title">
-                    Проверка безопасности
-                    <small>Защита от автоматических запросов</small>
-                </div>
+                <div class="captcha-icon"><i class="cf-icon cf-icon-security"></i></div>
+                <div class="captcha-title">Проверка безопасности<small>Защита от автоматических запросов</small></div>
             </div>
             <div class="scan-container">
                 <div class="scan-line"></div>
@@ -1484,140 +1262,84 @@
             </div>
             <div class="captcha-check-row">
                 <input type="checkbox" id="verifyCheck" />
-                <label for="verifyCheck">
-                    <i class="cf-icon cf-icon-checkmark-circle"></i> Я не робот
-                </label>
+                <label for="verifyCheck"><i class="cf-icon cf-icon-checkmark-circle"></i> Я не робот</label>
             </div>
         </div>
     </div>
 
-    <!-- ===== ЭТАП 2 ===== -->
     <div id="step2" class="step hidden">
-        <div class="step-title" style="font-size: 1.1rem;">
-            <i class="cf-icon cf-icon-loading"></i> Загрузка
-        </div>
+        <div class="step-title" style="font-size: 1.1rem;"><i class="cf-icon cf-icon-loading"></i> Загрузка</div>
         <div class="status-box" style="width: 100%;">
-            <div class="ping-text" id="pingDisplay">
-                <i class="cf-icon cf-icon-speed"></i> — ms
-            </div>
-            <div class="redirect-text" id="redirectText">
-                Перенаправляем вас на сайт через <span id="countdown">3</span>
-            </div>
-            <div class="progress-track">
-                <div class="progress-fill" id="progressFill" style="width: 100%;"></div>
-            </div>
+            <div class="ping-text" id="pingDisplay"><i class="cf-icon cf-icon-speed"></i> — ms</div>
+            <div class="redirect-text" id="redirectText">Перенаправляем вас на сайт через <span id="countdown">3</span></div>
+            <div class="progress-track"><div class="progress-fill" id="progressFill" style="width: 100%;"></div></div>
         </div>
     </div>
 
-    <!-- ===== ЭТАП 3: ОСНОВНОЙ САЙТ ===== -->
     <div id="step3" class="verification-site">
-
-        <div class="site-header">
-            <i class="cf-icon cf-icon-checkmark-circle"></i> Verification MrFeastProject
-        </div>
+        <div class="site-header"><i class="cf-icon cf-icon-checkmark-circle"></i> Verification MrFeastProject</div>
         <div class="site-subheader">Надёжная верификация проектов</div>
 
         <div class="nav-buttons">
-            <button class="btn-nav" id="checkVerifyBtn">
-                <i class="cf-icon cf-icon-search"></i> Проверить
-            </button>
-            <button class="btn-nav" id="infoBtn">
-                <i class="cf-icon cf-icon-info"></i> Информация
-            </button>
-            <button class="btn-nav" id="statsBtn">
-                <i class="cf-icon cf-icon-chart"></i> Статистика
-            </button>
+            <button class="btn-nav" id="checkVerifyBtn"><i class="cf-icon cf-icon-search"></i> Проверить</button>
+            <button class="btn-nav" id="infoBtn"><i class="cf-icon cf-icon-info"></i> Информация</button>
+            <button class="btn-nav" id="statsBtn"><i class="cf-icon cf-icon-chart"></i> Статистика</button>
         </div>
 
         <div class="info-cards" id="infoSection">
             <div class="info-card">
                 <div class="card-title">Надёжная верификация</div>
-                <div class="card-desc">
-                    Все проекты, верифицированные от MrFeastProject, считаются надёжными, т.к. мы тщательно проверяем Telegram-каналы, чаты, ботов и юзеров на репутацию, надёжность, контент, который они выпускают, и выдаём верификацию только проверенным источникам.
-                </div>
+                <div class="card-desc">Все проекты, верифицированные от MrFeastProject, считаются надёжными, т.к. мы тщательно проверяем Telegram-каналы, чаты, ботов, YouTube и юзеров на репутацию и выдаём верификацию только проверенным источникам.</div>
             </div>
             <div class="info-card">
                 <div class="card-title">Лёгкая отправка заявки</div>
-                <div class="card-desc">
-                    Легко отправьте заявку владельцу сайта в Telegram, и после проверки вашего контента он добавит вас, ваш канал, чат или бота в список верифицированных.
-                </div>
+                <div class="card-desc">Легко отправьте заявку менеджеру в Telegram, и после проверки вашего контента он добавит вас в список верифицированных.</div>
             </div>
             <div class="info-card">
                 <div class="card-title">Быстрая проверка</div>
-                <div class="card-desc">
-                    Процесс верификации занимает всего несколько минут. Наша команда оперативно обрабатывает все заявки и предоставляет результат в кратчайшие сроки.
-                </div>
+                <div class="card-desc">Процесс верификации занимает всего несколько минут. Наша команда оперативно обрабатывает все заявки.</div>
             </div>
             <div class="info-card">
                 <div class="card-title">Публичный реестр</div>
-                <div class="card-desc">
-                    Все верифицированные проекты публикуются в открытом реестре. Любой желающий может проверить подлинность верификации в один клик.
-                </div>
+                <div class="card-desc">Все верифицированные проекты публикуются в открытом реестре. Любой желающий может проверить подлинность в один клик.</div>
             </div>
         </div>
 
-        <!-- Партнёры -->
         <div class="partners">
-            <div class="partner-item">
-                <i class="cf-icon cf-icon-checkmark"></i> Open Source
-            </div>
-            <div class="partner-item">
-                <i class="cf-icon cf-icon-checkmark"></i> Trusted
-            </div>
-            <div class="partner-item">
-                <i class="cf-icon cf-icon-checkmark"></i> Community
-            </div>
-            <div class="partner-item">
-                <i class="cf-icon cf-icon-checkmark"></i> Secure
-            </div>
+            <div class="partner-item"><i class="cf-icon cf-icon-checkmark"></i> Open Source</div>
+            <div class="partner-item"><i class="cf-icon cf-icon-checkmark"></i> Trusted</div>
+            <div class="partner-item"><i class="cf-icon cf-icon-checkmark"></i> Community</div>
+            <div class="partner-item"><i class="cf-icon cf-icon-checkmark"></i> Secure</div>
         </div>
 
-        <button class="btn-primary" id="openModalBtn">
-            <i class="cf-icon cf-icon-paperplane"></i> Отправить заявку
-        </button>
+        <button class="btn-primary" id="openModalBtn"><i class="cf-icon cf-icon-paperplane"></i> Отправить заявку</button>
     </div>
-
 </div>
 
-<!-- ===== МОДАЛКА ЗАЯВКИ ===== -->
-<div class="modal-overlay" id="modalOverlay">
+<!-- ===== МОДАЛКА ВЫБОРА ПЛАТФОРМЫ (ПРОВЕРКА) ===== -->
+<div class="modal-overlay" id="verifyPlatformModal">
     <div class="modal">
-        <div class="modal-title">
-            <i class="cf-icon cf-icon-edit"></i> Отправка заявки
+        <div class="modal-title"><i class="cf-icon cf-icon-search"></i> Выберите платформу</div>
+        <div class="platform-buttons">
+            <button type="button" class="btn-platform btn-telegram" id="chooseTgVerifyBtn">
+                Telegram
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            </button>
+            <button type="button" class="btn-platform btn-youtube" id="chooseYtVerifyBtn">
+                YouTube
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </button>
         </div>
-        <form id="applicationForm">
-            <div class="form-group" id="appTypeGroup">
-                <label for="contentType">Тип контента</label>
-                <select id="contentType" required>
-                    <option value="">Выберите тип</option>
-                    <option value="Канал">Канал</option>
-                    <option value="Чат">Чат</option>
-                    <option value="Бот">Бот</option>
-                    <option value="Юзер">Юзер</option>
-                </select>
-                <div class="error-text" id="appTypeError">Пожалуйста, выберите тип контента</div>
-            </div>
-            <div class="form-group" id="appUserGroup">
-                <label for="username">Юзернейм</label>
-                <input type="text" id="username" placeholder="@username" required />
-                <div class="error-text" id="appUserError">Юзернейм должен начинаться с @</div>
-            </div>
-            <div class="form-actions">
-                <button type="button" class="btn-secondary" id="closeModalBtn">Отмена</button>
-                <button type="submit" class="btn-primary">
-                    <i class="cf-icon cf-icon-paperplane"></i> Отправить
-                </button>
-            </div>
-        </form>
+        <div style="margin-top: 16px; text-align: center;">
+            <button type="button" class="btn-secondary" id="closeVerifyPlatformBtn">Отмена</button>
+        </div>
     </div>
 </div>
 
-<!-- ===== МОДАЛКА ПРОВЕРКИ ===== -->
+<!-- ===== МОДАЛКА ПРОВЕРКИ TELEGRAM ===== -->
 <div class="modal-overlay" id="verifyModal">
     <div class="modal">
-        <div class="modal-title">
-            <i class="cf-icon cf-icon-search"></i> Verification Telegram Content
-        </div>
+        <div class="modal-title"><i class="cf-icon cf-icon-message"></i> Verification Telegram Content</div>
         <form id="verifyForm">
             <div class="form-group" id="verifyTypeGroup">
                 <label for="verifyType">Контент</label>
@@ -1637,83 +1359,160 @@
             </div>
             <div class="form-actions">
                 <button type="button" class="btn-secondary" id="closeVerifyBtn">Отмена</button>
-                <button type="submit" class="btn-primary" id="verifySubmitBtn">
-                    <i class="cf-icon cf-icon-checkmark"></i> Проверить
-                </button>
+                <button type="submit" class="btn-primary" id="verifySubmitBtn"><i class="cf-icon cf-icon-checkmark"></i> Проверить</button>
             </div>
         </form>
-
         <div id="verifyResult" class="verify-result">
             <img id="resultImage" class="result-image" src="" alt="Результат" />
             <div class="result-title" id="resultTitle">Verification Telegram Content</div>
-            <div class="result-status" id="resultStatus">
-                <i class="cf-icon cf-icon-checkmark-circle"></i> <span id="statusTextResult">Загрузка...</span>
-            </div>
+            <div class="result-status" id="resultStatus"><i class="cf-icon cf-icon-checkmark-circle"></i> <span id="statusTextResult">Загрузка...</span></div>
             <div class="result-desc" id="resultDesc"></div>
             <div class="result-role" id="resultRole" style="display: none;"></div>
             <div class="result-actions" id="resultActions">
-                <button class="btn-primary" id="openTgBtn">
-                    <i class="cf-icon cf-icon-arrow-right"></i> Открыть
-                </button>
-                <button class="btn-copy" id="copyPreviewBtn">
-                    <i class="cf-icon cf-icon-copy"></i> Скопировать ссылку
-                </button>
+                <button class="btn-primary" id="openTgBtn"><i class="cf-icon cf-icon-arrow-right"></i> Открыть</button>
+                <button class="btn-copy" id="copyPreviewBtn"><i class="cf-icon cf-icon-copy"></i> Скопировать ссылку</button>
                 <button class="btn-close-result" id="closeResultBtn">Закрыть</button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- ===== МОДАЛКА ПРОВЕРКИ YOUTUBE ===== -->
+<div class="modal-overlay" id="verifyYouTubeModal">
+    <div class="modal">
+        <div class="modal-title"><i class="cf-icon cf-icon-play"></i> Verification YouTube Channel</div>
+        <form id="verifyYouTubeForm">
+            <div class="form-group" id="verifyYtUrlGroup">
+                <label for="verifyYtUrl">Ссылка на канал</label>
+                <input type="url" id="verifyYtUrl" placeholder="https://www.youtube.com/@MrFeastChannelOfficial" required />
+                <div class="error-text" id="verifyYtUrlError">Введите корректную ссылку на YouTube канал</div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" id="closeVerifyYtBtn">Отмена</button>
+                <button type="submit" class="btn-primary" id="verifyYtSubmitBtn"><i class="cf-icon cf-icon-checkmark"></i> Проверить</button>
+            </div>
+        </form>
+        <div id="verifyYtResult" class="verify-result">
+            <img id="resultYtImage" class="result-image" src="" alt="Результат" />
+            <div class="result-title" id="resultYtTitle">Verification YouTube Channel</div>
+            <div class="result-status" id="resultYtStatus"><i class="cf-icon cf-icon-checkmark-circle"></i> <span id="statusYtTextResult">Загрузка...</span></div>
+            <div class="result-desc" id="resultYtDesc"></div>
+            <div class="result-role" id="resultYtRole" style="display: none;"></div>
+            <div class="result-actions" id="resultYtActions">
+                <button class="btn-primary" id="openYtBtn"><i class="cf-icon cf-icon-arrow-right"></i> Открыть</button>
+                <button class="btn-copy" id="copyYtPreviewBtn"><i class="cf-icon cf-icon-copy"></i> Скопировать ссылку</button>
+                <button class="btn-close-result" id="closeYtResultBtn">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== МОДАЛКА ВЫБОРА ПЛАТФОРМЫ (ЗАЯВКА) ===== -->
+<div class="modal-overlay" id="appPlatformModal">
+    <div class="modal">
+        <div class="modal-title"><i class="cf-icon cf-icon-edit"></i> Выберите платформу для заявки</div>
+        <div class="platform-buttons">
+            <button type="button" class="btn-platform btn-telegram" id="chooseTgAppBtn">
+                Telegram
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            </button>
+            <button type="button" class="btn-platform btn-youtube" id="chooseYtAppBtn">
+                YouTube
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </button>
+        </div>
+        <div style="margin-top: 16px; text-align: center;">
+            <button type="button" class="btn-secondary" id="closeAppPlatformBtn">Отмена</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== МОДАЛКА ЗАЯВКИ TELEGRAM ===== -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+        <div class="modal-title"><i class="cf-icon cf-icon-message"></i> Заявка на Telegram</div>
+        <form id="applicationForm">
+            <div class="form-group" id="appTypeGroup">
+                <label for="contentType">Тип контента</label>
+                <select id="contentType" required>
+                    <option value="">Выберите тип</option>
+                    <option value="Telegram канал">Telegram канал</option>
+                    <option value="Telegram чат">Telegram чат</option>
+                    <option value="Telegram бот">Telegram бот</option>
+                    <option value="Telegram профиль">Telegram профиль</option>
+                </select>
+                <div class="error-text" id="appTypeError">Пожалуйста, выберите тип контента</div>
+            </div>
+            <div class="form-group" id="appUserGroup">
+                <label for="username">Юзернейм</label>
+                <input type="text" id="username" placeholder="@username" required />
+                <div class="error-text" id="appUserError">Юзернейм должен начинаться с @</div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" id="closeModalBtn">Отмена</button>
+                <button type="submit" class="btn-primary"><i class="cf-icon cf-icon-paperplane"></i> Отправить</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ===== МОДАЛКА ЗАЯВКИ YOUTUBE ===== -->
+<div class="modal-overlay" id="appYouTubeModal">
+    <div class="modal">
+        <div class="modal-title"><i class="cf-icon cf-icon-play"></i> Заявка на YouTube канал</div>
+        <form id="appYouTubeForm">
+            <div class="form-group" id="appYtUrlGroup">
+                <label for="appYtUrl">Ссылка на канал</label>
+                <input type="url" id="appYtUrl" placeholder="https://www.youtube.com/@MrFeastChannelOfficial" required />
+                <div class="error-text" id="appYtUrlError">Введите корректную ссылку на YouTube канал</div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" id="closeAppYtBtn">Отмена</button>
+                <button type="submit" class="btn-primary"><i class="cf-icon cf-icon-paperplane"></i> Отправить</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <!-- ===== МОДАЛКА СТАТИСТИКИ ===== -->
 <div class="modal-overlay" id="statsModal">
     <div class="modal">
-        <div class="modal-title">
-            <i class="cf-icon cf-icon-chart"></i> Статистика
+        <div class="modal-title"><i class="cf-icon cf-icon-chart"></i> Статистика</div>
+        
+        <div style="text-align: center; color: #6f9f6f; font-size: 0.7rem; letter-spacing: 1px; margin-bottom: 8px;">
+            ВСЕГО ВЕРИФИЦИРОВАНО
+        </div>
+        <div class="stats-grid" style="margin-bottom: 16px;">
+            <div class="stat-block" style="grid-column: 1 / -1;">
+                <div class="num" id="totalAllVerified" style="font-size: 2rem;">0</div>
+                <div class="label">Общее количество</div>
+            </div>
+            <div class="stat-block">
+                <div class="num" id="totalTgChannels">0</div>
+                <div class="label">Telegram каналов</div>
+            </div>
+            <div class="stat-block">
+                <div class="num" id="totalYtChannels">0</div>
+                <div class="label">YouTube каналов</div>
+            </div>
         </div>
 
         <div style="text-align: center; color: #6f9f6f; font-size: 0.7rem; letter-spacing: 1px; margin-bottom: 8px;">
             ВЕРИФИЦИРОВАНО (Из главного списка)
         </div>
         <div class="stats-grid" id="verifiedStats">
-            <div class="stat-block">
-                <div class="num" id="vChannels">0</div>
-                <div class="label">Каналов</div>
-            </div>
-            <div class="stat-block">
-                <div class="num" id="vChats">0</div>
-                <div class="label">Чатов</div>
-            </div>
-            <div class="stat-block">
-                <div class="num" id="vBots">0</div>
-                <div class="label">Ботов</div>
-            </div>
-            <div class="stat-block">
-                <div class="num" id="vUsers">0</div>
-                <div class="label">Юзеров</div>
-            </div>
+            <div class="stat-block"><div class="num" id="vChannels">0</div><div class="label">Каналов</div></div>
+            <div class="stat-block"><div class="num" id="vChats">0</div><div class="label">Чатов</div></div>
+            <div class="stat-block"><div class="num" id="vBots">0</div><div class="label">Ботов</div></div>
+            <div class="stat-block"><div class="num" id="vUsers">0</div><div class="label">Юзеров</div></div>
         </div>
-
         <div class="stats-divider"><i class="cf-icon cf-icon-warning"></i> Без верификации с плохой репутацией</div>
-
         <div class="stats-grid" id="badStats">
-            <div class="stat-block bad">
-                <div class="num" id="bChannels">0</div>
-                <div class="label">Каналов</div>
-            </div>
-            <div class="stat-block bad">
-                <div class="num" id="bChats">0</div>
-                <div class="label">Чатов</div>
-            </div>
-            <div class="stat-block bad">
-                <div class="num" id="bBots">0</div>
-                <div class="label">Ботов</div>
-            </div>
-            <div class="stat-block bad">
-                <div class="num" id="bUsers">0</div>
-                <div class="label">Юзеров</div>
-            </div>
+            <div class="stat-block bad"><div class="num" id="bChannels">0</div><div class="label">Каналов</div></div>
+            <div class="stat-block bad"><div class="num" id="bChats">0</div><div class="label">Чатов</div></div>
+            <div class="stat-block bad"><div class="num" id="bBots">0</div><div class="label">Ботов</div></div>
+            <div class="stat-block bad"><div class="num" id="bUsers">0</div><div class="label">Юзеров</div></div>
         </div>
-
         <div style="margin-top: 12px; display: flex; gap: 8px; justify-content: center;">
             <button class="btn-secondary" onclick="closeStatsModal()" style="padding: 8px 24px;">Закрыть</button>
         </div>
@@ -1755,16 +1554,10 @@
         const statsBtn = document.getElementById('statsBtn');
         const infoSection = document.getElementById('infoSection');
 
-        const modalOverlay = document.getElementById('modalOverlay');
-        const openModalBtn = document.getElementById('openModalBtn');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const applicationForm = document.getElementById('applicationForm');
-        const contentType = document.getElementById('contentType');
-        const usernameInput = document.getElementById('username');
-        const appTypeGroup = document.getElementById('appTypeGroup');
-        const appUserGroup = document.getElementById('appUserGroup');
-        const appTypeError = document.getElementById('appTypeError');
-        const appUserError = document.getElementById('appUserError');
+        const verifyPlatformModal = document.getElementById('verifyPlatformModal');
+        const chooseTgVerifyBtn = document.getElementById('chooseTgVerifyBtn');
+        const chooseYtVerifyBtn = document.getElementById('chooseYtVerifyBtn');
+        const closeVerifyPlatformBtn = document.getElementById('closeVerifyPlatformBtn');
 
         const verifyModal = document.getElementById('verifyModal');
         const closeVerifyBtn = document.getElementById('closeVerifyBtn');
@@ -1786,17 +1579,69 @@
         const copyPreviewBtn = document.getElementById('copyPreviewBtn');
         const verifySubmitBtn = document.getElementById('verifySubmitBtn');
 
+        const verifyYouTubeModal = document.getElementById('verifyYouTubeModal');
+        const closeVerifyYtBtn = document.getElementById('closeVerifyYtBtn');
+        const verifyYouTubeForm = document.getElementById('verifyYouTubeForm');
+        const verifyYtUrl = document.getElementById('verifyYtUrl');
+        const verifyYtUrlGroup = document.getElementById('verifyYtUrlGroup');
+        const verifyYtUrlError = document.getElementById('verifyYtUrlError');
+        const verifyYtSubmitBtn = document.getElementById('verifyYtSubmitBtn');
+        const verifyYtResult = document.getElementById('verifyYtResult');
+        const resultYtImage = document.getElementById('resultYtImage');
+        const resultYtTitle = document.getElementById('resultYtTitle');
+        const statusYtTextResult = document.getElementById('statusYtTextResult');
+        const resultYtDesc = document.getElementById('resultYtDesc');
+        const resultYtRole = document.getElementById('resultYtRole');
+        const openYtBtn = document.getElementById('openYtBtn');
+        const closeYtResultBtn = document.getElementById('closeYtResultBtn');
+        const copyYtPreviewBtn = document.getElementById('copyYtPreviewBtn');
+
+        const appPlatformModal = document.getElementById('appPlatformModal');
+        const chooseTgAppBtn = document.getElementById('chooseTgAppBtn');
+        const chooseYtAppBtn = document.getElementById('chooseYtAppBtn');
+        const closeAppPlatformBtn = document.getElementById('closeAppPlatformBtn');
+
+        const modalOverlay = document.getElementById('modalOverlay');
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const applicationForm = document.getElementById('applicationForm');
+        const contentType = document.getElementById('contentType');
+        const usernameInput = document.getElementById('username');
+        const appTypeGroup = document.getElementById('appTypeGroup');
+        const appUserGroup = document.getElementById('appUserGroup');
+        const appTypeError = document.getElementById('appTypeError');
+        const appUserError = document.getElementById('appUserError');
+
+        const appYouTubeModal = document.getElementById('appYouTubeModal');
+        const closeAppYtBtn = document.getElementById('closeAppYtBtn');
+        const appYouTubeForm = document.getElementById('appYouTubeForm');
+        const appYtUrl = document.getElementById('appYtUrl');
+        const appYtUrlGroup = document.getElementById('appYtUrlGroup');
+        const appYtUrlError = document.getElementById('appYtUrlError');
+
         const notification = document.getElementById('notification');
         const statsModal = document.getElementById('statsModal');
         const totalVerifiedEl = document.getElementById('totalVerified');
+        const totalChannelsEl = document.getElementById('totalChannels');
 
         const VERIFICATE_URL = 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/verificate.txt';
         const BAD_URL = 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/Bad.txt';
         const BAD_IMAGE_URL = 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/Bad.png';
+        const YOUTUBE_URL = 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/YouTube.txt';
 
         let verificationData = {};
+        let verificationDataYt = {};
         let totalCount = 0;
+        let totalChannelsCount = 0;
+        let youtubeChannelsCount = 0;
         let isVerifying = false;
+        let isVerifyingYt = false;
+
+        // ===== НОВАЯ ФУНКЦИЯ: извлечение @username из YouTube ссылки =====
+        function extractYouTubeUsername(url) {
+            const match = url.match(/@([^\/\?#]+)/);
+            return match ? '@' + match[1] : url;
+        }
 
         function showError(group, errorEl, message) {
             group.classList.add('error');
@@ -1814,6 +1659,8 @@
             hideError(appUserGroup, appUserError);
             hideError(verifyTypeGroup, verifyTypeError);
             hideError(verifyUserGroup, verifyUserError);
+            hideError(verifyYtUrlGroup, verifyYtUrlError);
+            hideError(appYtUrlGroup, appYtUrlError);
         }
 
         function validateUsername(username, group, errorEl) {
@@ -1823,6 +1670,15 @@
             }
             if (username.length < 2) {
                 showError(group, errorEl, 'Введите корректный юзернейм');
+                return false;
+            }
+            hideError(group, errorEl);
+            return true;
+        }
+
+        function validateYtUrl(url, group, errorEl) {
+            if (!url.startsWith('https://www.youtube.com/')) {
+                showError(group, errorEl, 'Ссылка должна начинаться с https://www.youtube.com/');
                 return false;
             }
             hideError(group, errorEl);
@@ -1839,16 +1695,9 @@
         }
 
         function parseList(data) {
-            const categories = {
-                'Канал': [],
-                'Чат': [],
-                'Бот': [],
-                'Юзер': []
-            };
-
+            const categories = { 'Канал': [], 'Чат': [], 'Бот': [], 'Юзер': [] };
             let currentCategory = null;
             const lines = data.split('\n');
-
             for (let line of lines) {
                 line = line.trim();
                 if (line.startsWith('==Telegram')) {
@@ -1862,27 +1711,51 @@
                     categories[currentCategory].push(line);
                 }
             }
-
             return categories;
         }
 
-        function updateStats(verifData, badData) {
+        function parseYouTubeList(data) {
+            const channels = [];
+            let currentCategory = null;
+            const lines = data.split('\n');
+            for (let line of lines) {
+                line = line.trim();
+                if (line.startsWith('==YouTube')) {
+                    if (line.includes('Channel')) currentCategory = 'Channel';
+                    continue;
+                }
+                if (line && currentCategory === 'Channel' && line.startsWith('https://')) {
+                    channels.push(line);
+                }
+            }
+            return channels;
+        }
+
+        function updateStats(verifData, badData, ytData) {
             const vCategories = parseList(verifData);
             const bCategories = parseList(badData);
-
+            const ytChannels = parseYouTubeList(ytData);
+            
             let total = 0;
-            ['Канал', 'Чат', 'Бот', 'Юзер'].forEach(k => {
-                total += vCategories[k].length;
-            });
-
-            totalCount = total;
-            totalVerifiedEl.textContent = total;
-
-            document.getElementById('vChannels').textContent = vCategories['Канал'].length;
+            ['Канал', 'Чат', 'Бот', 'Юзер'].forEach(k => { total += vCategories[k].length; });
+            
+            const tgChannelsCount = vCategories['Канал'].length;
+            youtubeChannelsCount = ytChannels.length;
+            totalChannelsCount = tgChannelsCount + youtubeChannelsCount;
+            
+            totalCount = total + youtubeChannelsCount;
+            totalVerifiedEl.textContent = totalCount;
+            totalChannelsEl.textContent = totalChannelsCount;
+            
+            document.getElementById('vChannels').textContent = tgChannelsCount;
             document.getElementById('vChats').textContent = vCategories['Чат'].length;
             document.getElementById('vBots').textContent = vCategories['Бот'].length;
             document.getElementById('vUsers').textContent = vCategories['Юзер'].length;
-
+            
+            document.getElementById('totalTgChannels').textContent = tgChannelsCount;
+            document.getElementById('totalYtChannels').textContent = youtubeChannelsCount;
+            document.getElementById('totalAllVerified').textContent = totalCount;
+            
             document.getElementById('bChannels').textContent = bCategories['Канал'].length || 0;
             document.getElementById('bChats').textContent = bCategories['Чат'].length || 0;
             document.getElementById('bBots').textContent = bCategories['Бот'].length || 0;
@@ -1891,7 +1764,6 @@
 
         function showVerificationResult(found, type, username, wasExpired, inBad) {
             verifyResult.classList.add('visible');
-
             const roles = {
                 '@MrFeast_Official': { text: '<i class="cf-icon cf-icon-user"></i> ✧ Владелец сайта ✧' },
                 '@MrFeast_Official2': { text: '<i class="cf-icon cf-icon-user"></i> ✧ Владелец сайта ✧' },
@@ -1903,37 +1775,26 @@
                 document.body.classList.add('alert-mode');
                 alertBanner.classList.add('visible');
                 verifyResult.className = 'verify-result visible alert';
-
                 resultImage.src = BAD_IMAGE_URL;
                 resultImage.alt = 'Плохая репутация';
-
                 resultTitle.textContent = 'Verification Telegram Content';
                 resultTitle.style.color = '#ff6666';
-
                 resultStatus.className = 'result-status';
                 statusTextResult.innerHTML = '<i class="cf-icon cf-icon-warning"></i> Нету сертификата + плохая репутация';
                 statusTextResult.style.color = '#ff3333';
-
                 resultDesc.textContent = `Данный ${type} ${username} не имеет сертификата от MrFeastProject. А так-же у него имеется плохая репутация, что крайне не рекомендуем как-либо контактировать с данным источником.`;
                 resultDesc.style.color = '#ff9999';
-
                 resultRole.style.display = 'none';
-
                 openTgBtn.className = 'btn-danger';
                 openTgBtn.innerHTML = '<i class="cf-icon cf-icon-warning"></i> Открыть (опасно)';
                 copyPreviewBtn.style.display = 'none';
-
                 return;
             }
 
             document.body.classList.remove('alert-mode');
             alertBanner.classList.remove('visible');
             verifyResult.classList.remove('alert');
-
-            const imageUrl = found
-                ? 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/Verification.png'
-                : 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/NoVerification.png';
-
+            const imageUrl = found ? 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/Verification.png' : 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/NoVerification.png';
             resultImage.src = imageUrl;
             resultImage.alt = found ? 'Верификация найдена' : 'Нет верификации';
             resultTitle.style.color = '';
@@ -1945,56 +1806,74 @@
                 statusTextResult.style.color = '#00ff41';
                 resultDesc.textContent = `Данный ${type} ${username} был верифицирован от MrFeastProject.`;
                 resultDesc.style.color = '';
-
-                if (roles[username]) {
-                    resultRole.style.display = 'inline-block';
-                    resultRole.innerHTML = roles[username].text;
-                } else {
-                    resultRole.style.display = 'none';
-                }
-
+                if (roles[username]) { resultRole.style.display = 'inline-block'; resultRole.innerHTML = roles[username].text; }
+                else { resultRole.style.display = 'none'; }
                 openTgBtn.className = 'btn-primary';
                 openTgBtn.innerHTML = '<i class="cf-icon cf-icon-arrow-right"></i> Открыть';
                 copyPreviewBtn.style.display = 'flex';
-
             } else {
                 verifyResult.className = 'verify-result visible error';
                 resultStatus.className = 'result-status';
                 statusTextResult.innerHTML = '<i class="cf-icon cf-icon-close"></i> Нету Верификации';
                 statusTextResult.style.color = '#ff4444';
                 resultDesc.style.color = '';
-
-                if (wasExpired) {
-                    resultDesc.textContent = `Данный ${type} ${username} не имеет верификацию от MrFeastProject. Верификация истекла или была отозвана.`;
-                } else {
-                    resultDesc.textContent = `Данный ${type} ${username} не имеет верификацию от MrFeastProject. Мы настоятельно не рекомендуем использовать как либо этот источник.`;
-                }
-
+                resultDesc.textContent = wasExpired ? `Данный ${type} ${username} не имеет верификацию от MrFeastProject. Верификация истекла или была отозвана.` : `Данный ${type} ${username} не имеет верификацию от MrFeastProject. Мы настоятельно не рекомендуем использовать как либо этот источник.`;
                 resultRole.style.display = 'none';
-
                 openTgBtn.className = 'btn-danger';
                 openTgBtn.innerHTML = '<i class="cf-icon cf-icon-warning"></i> Открыть (небезопасно)';
                 copyPreviewBtn.style.display = 'none';
             }
         }
 
-        async function loadStats() {
-            try {
-                const [verifRes, badRes] = await Promise.all([
-                    fetch(VERIFICATE_URL, { cache: 'no-store', signal: AbortSignal.timeout(5000) }),
-                    fetch(BAD_URL, { cache: 'no-store', signal: AbortSignal.timeout(5000) })
-                ]);
+        function showYouTubeVerificationResult(found, url) {
+            verifyYtResult.classList.add('visible');
+            const imageUrl = found ? 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/Verification.png' : 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/NoVerification.png';
+            resultYtImage.src = imageUrl;
+            resultYtImage.alt = found ? 'Верификация найдена' : 'Нет верификации';
+            resultYtTitle.style.color = '';
 
-                if (verifRes.ok && badRes.ok) {
-                    const verifData = await verifRes.text();
-                    const badData = await badRes.text();
-                    updateStats(verifData, badData);
-                }
-            } catch (e) {
-                console.log('Статистика временно недоступна');
+            // ===== ИЗВЛЕКАЕМ @username ИЗ ССЫЛКИ =====
+            const ytUsername = extractYouTubeUsername(url);
+
+            if (found) {
+                verifyYtResult.className = 'verify-result visible success';
+                resultYtStatus.className = 'result-status';
+                statusYtTextResult.innerHTML = '<i class="cf-icon cf-icon-checkmark-circle"></i> Верификация действует';
+                statusYtTextResult.style.color = '#00ff41';
+                resultYtDesc.textContent = `Данный YouTube канал ${ytUsername} был верифицирован от MrFeastProject.`;
+                resultYtDesc.style.color = '';
+                resultYtRole.style.display = 'none';
+                openYtBtn.className = 'btn-primary';
+                openYtBtn.innerHTML = '<i class="cf-icon cf-icon-arrow-right"></i> Открыть';
+                copyYtPreviewBtn.style.display = 'flex';
+                verificationDataYt = { url, username: ytUsername, found };
+            } else {
+                verifyYtResult.className = 'verify-result visible error';
+                resultYtStatus.className = 'result-status';
+                statusYtTextResult.innerHTML = '<i class="cf-icon cf-icon-close"></i> Нету Верификации';
+                statusYtTextResult.style.color = '#ff4444';
+                resultYtDesc.textContent = `Данный YouTube канал ${ytUsername} не имеет верификацию от MrFeastProject. Мы настоятельно не рекомендуем использовать этот источник.`;
+                resultYtDesc.style.color = '';
+                resultYtRole.style.display = 'none';
+                openYtBtn.className = 'btn-danger';
+                openYtBtn.innerHTML = '<i class="cf-icon cf-icon-warning"></i> Открыть (небезопасно)';
+                copyYtPreviewBtn.style.display = 'none';
+                verificationDataYt = { url, username: ytUsername, found };
             }
         }
 
+        async function loadStats() {
+            try {
+                const [verifRes, badRes, ytRes] = await Promise.all([
+                    fetch(VERIFICATE_URL, { cache: 'no-store', signal: AbortSignal.timeout(5000) }),
+                    fetch(BAD_URL, { cache: 'no-store', signal: AbortSignal.timeout(5000) }),
+                    fetch(YOUTUBE_URL, { cache: 'no-store', signal: AbortSignal.timeout(5000) })
+                ]);
+                if (verifRes.ok && badRes.ok && ytRes.ok) {
+                    updateStats(await verifRes.text(), await badRes.text(), await ytRes.text());
+                }
+            } catch (e) { console.log('Статистика временно недоступна'); }
+        }
         loadStats();
 
         setTimeout(() => {
@@ -2009,22 +1888,17 @@
                 this.disabled = true;
                 statusText.innerHTML = '<i class="cf-icon cf-icon-loading"></i> Проверка...';
                 statusText.style.color = '#b4ffb4';
-
-                setTimeout(() => {
-                    startPingAndRedirect();
-                }, 800);
+                setTimeout(() => { startPingAndRedirect(); }, 800);
             }
         });
 
         function startPingAndRedirect() {
             step1.classList.add('hidden');
             step2.classList.remove('hidden');
-
             const startTime = performance.now();
             const img = new Image();
             img.onload = img.onerror = function() {
-                const pingMs = Math.round(performance.now() - startTime);
-                pingDisplay.innerHTML = `<i class="cf-icon cf-icon-speed"></i> ${pingMs} ms`;
+                pingDisplay.innerHTML = `<i class="cf-icon cf-icon-speed"></i> ${Math.round(performance.now() - startTime)} ms`;
                 startCountdown();
             };
             img.src = 'https://github.com/favicon.ico?t=' + Date.now();
@@ -2034,112 +1908,33 @@
             let counter = 3;
             countdownSpan.textContent = counter;
             progressFill.style.width = '100%';
-
             const totalSteps = 30;
             let step = 0;
             const interval = setInterval(() => {
                 step++;
                 progressFill.style.width = ((1 - step / totalSteps) * 100) + '%';
-
                 const newCounter = 3 - Math.floor(step / (totalSteps / 3));
-                if (newCounter >= 0 && newCounter !== parseInt(countdownSpan.textContent)) {
-                    countdownSpan.textContent = newCounter;
-                }
-
+                if (newCounter >= 0 && newCounter !== parseInt(countdownSpan.textContent)) countdownSpan.textContent = newCounter;
                 if (step >= totalSteps) {
                     clearInterval(interval);
                     countdownSpan.textContent = '0';
                     progressFill.style.width = '0%';
-                    showVerificationSite();
+                    step2.classList.add('hidden');
+                    step3.classList.add('visible');
                 }
             }, 100);
         }
 
-        function showVerificationSite() {
-            step2.classList.add('hidden');
-            step3.classList.add('visible');
-        }
+        infoBtn.addEventListener('click', () => infoSection.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+        statsBtn.addEventListener('click', () => { statsModal.classList.add('visible'); document.body.style.overflow = 'hidden'; loadStats(); });
+        window.closeStatsModal = function() { statsModal.classList.remove('visible'); document.body.style.overflow = ''; };
+        statsModal.addEventListener('click', (e) => { if (e.target === statsModal) closeStatsModal(); });
 
-        infoBtn.addEventListener('click', () => {
-            infoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-
-        statsBtn.addEventListener('click', () => {
-            statsModal.classList.add('visible');
-            document.body.style.overflow = 'hidden';
-            loadStats();
-        });
-
-        window.closeStatsModal = function() {
-            statsModal.classList.remove('visible');
-            document.body.style.overflow = '';
-        };
-
-        statsModal.addEventListener('click', (e) => {
-            if (e.target === statsModal) closeStatsModal();
-        });
-
-        openModalBtn.addEventListener('click', () => {
-            modalOverlay.classList.add('visible');
-            document.body.style.overflow = 'hidden';
-            clearAllErrors();
-            applicationForm.reset();
-        });
-
-        closeModalBtn.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) closeModal();
-        });
-
-        function closeModal() {
-            modalOverlay.classList.remove('visible');
-            document.body.style.overflow = '';
-            clearAllErrors();
-            applicationForm.reset();
-        }
-
-        applicationForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            clearAllErrors();
-
-            const type = contentType.value;
-            const username = usernameInput.value.trim();
-
-            let isValid = true;
-
-            if (!validateType(type, appTypeGroup, appTypeError)) isValid = false;
-            if (!validateUsername(username, appUserGroup, appUserError)) isValid = false;
-
-            if (!isValid) return;
-
-            closeModal();
-            notification.classList.add('visible');
-
-            const typeMap = {
-                'Канал': 'Канала',
-                'Чат': 'Чата',
-                'Бот': 'Бота',
-                'Юзер': 'Юзера'
-            };
-            const typeForMessage = typeMap[type] || type;
-
-            setTimeout(() => {
-                const message = `Здравствуйте! Я отправил(а) заявку на верификацию моего ${typeForMessage}\n\nТип: ${type}\nЮзернейм: ${username}`;
-                const encodedMessage = encodeURIComponent(message);
-                const tgLink = `tg://resolve?domain=MrFeastProjectVerificatedManager&text=${encodedMessage}`;
-
-                window.open(tgLink, '_blank');
-
-                setTimeout(() => {
-                    notification.classList.remove('visible');
-                }, 1500);
-            }, 2000);
-        });
-
-        checkVerifyBtn.addEventListener('click', () => {
+        checkVerifyBtn.addEventListener('click', () => { verifyPlatformModal.classList.add('visible'); document.body.style.overflow = 'hidden'; });
+        
+        chooseTgVerifyBtn.addEventListener('click', () => {
+            verifyPlatformModal.classList.remove('visible');
             verifyModal.classList.add('visible');
-            document.body.style.overflow = 'hidden';
             verifyResult.classList.remove('visible', 'success', 'error', 'alert');
             document.body.classList.remove('alert-mode');
             alertBanner.classList.remove('visible');
@@ -2150,11 +1945,22 @@
             isVerifying = false;
         });
 
-        closeVerifyBtn.addEventListener('click', closeVerifyModal);
-        verifyModal.addEventListener('click', (e) => {
-            if (e.target === verifyModal) closeVerifyModal();
+        chooseYtVerifyBtn.addEventListener('click', () => {
+            verifyPlatformModal.classList.remove('visible');
+            verifyYouTubeModal.classList.add('visible');
+            verifyYtResult.classList.remove('visible', 'success', 'error');
+            clearAllErrors();
+            verifyYouTubeForm.reset();
+            verifyYtSubmitBtn.disabled = false;
+            verifyYtSubmitBtn.innerHTML = '<i class="cf-icon cf-icon-checkmark"></i> Проверить';
+            isVerifyingYt = false;
         });
 
+        closeVerifyPlatformBtn.addEventListener('click', () => { verifyPlatformModal.classList.remove('visible'); document.body.style.overflow = ''; });
+        verifyPlatformModal.addEventListener('click', (e) => { if (e.target === verifyPlatformModal) { verifyPlatformModal.classList.remove('visible'); document.body.style.overflow = ''; } });
+
+        closeVerifyBtn.addEventListener('click', closeVerifyModal);
+        verifyModal.addEventListener('click', (e) => { if (e.target === verifyModal) closeVerifyModal(); });
         function closeVerifyModal() {
             verifyModal.classList.remove('visible');
             document.body.style.overflow = '';
@@ -2167,43 +1973,24 @@
 
         verifyForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-
             if (isVerifying) return;
-
             clearAllErrors();
-
             const type = verifyType.value;
             const username = verifyUsername.value.trim();
-
-            let isValid = true;
-
-            if (!validateType(type, verifyTypeGroup, verifyTypeError)) isValid = false;
-            if (!validateUsername(username, verifyUserGroup, verifyUserError)) isValid = false;
-
-            if (!isValid) return;
+            if (!validateType(type, verifyTypeGroup, verifyTypeError) || !validateUsername(username, verifyUserGroup, verifyUserError)) return;
 
             isVerifying = true;
             verifySubmitBtn.disabled = true;
             verifySubmitBtn.innerHTML = '<i class="cf-icon cf-icon-loading"></i> Загрузка...';
-
             try {
                 const [verifResponse, badResponse] = await Promise.all([
                     fetch(VERIFICATE_URL, { cache: 'no-store', signal: AbortSignal.timeout(5000) }),
                     fetch(BAD_URL, { cache: 'no-store', signal: AbortSignal.timeout(5000) })
                 ]);
-
-                if (!verifResponse.ok || !badResponse.ok) {
-                    throw new Error('Ошибка загрузки списков');
-                }
-
-                const verifData = await verifResponse.text();
-                const badData = await badResponse.text();
-
-                const verifCategories = parseList(verifData);
-                const badCategories = parseList(badData);
-
+                if (!verifResponse.ok || !badResponse.ok) throw new Error('Ошибка загрузки списков');
+                const verifCategories = parseList(await verifResponse.text());
+                const badCategories = parseList(await badResponse.text());
                 const inBad = badCategories[type]?.includes(username) || false;
-
                 if (inBad) {
                     verificationData = { type, username, found: false, inBad: true };
                     showVerificationResult(false, type, username, false, true);
@@ -2212,10 +1999,9 @@
                     verificationData = { type, username, found, inBad: false };
                     showVerificationResult(found, type, username, false, false);
                 }
-
             } catch (error) {
                 console.error('Ошибка загрузки списков:', error);
-                alert('❌ Ошибка загрузки списков верификации с GitHub. Проверьте подключение к интернету и попробуйте позже.');
+                alert('❌ Ошибка загрузки списков верификации с GitHub. Проверьте подключение к интернету.');
             } finally {
                 verifySubmitBtn.disabled = false;
                 verifySubmitBtn.innerHTML = '<i class="cf-icon cf-icon-checkmark"></i> Проверить';
@@ -2224,48 +2010,181 @@
         });
 
         copyPreviewBtn.addEventListener('click', function() {
-            const data = verificationData;
-            if (!data.username) return;
-
+            if (!verificationData.username) return;
             const baseUrl = window.location.origin + window.location.pathname.replace('index.html', '');
-            const previewUrl = baseUrl + 'preview.html?' + new URLSearchParams({
-                type: data.type,
-                username: data.username,
-                found: data.found ? 'true' : 'false'
-            }).toString();
-
+            const previewUrl = baseUrl + 'preview.html?' + new URLSearchParams({ type: verificationData.type, username: verificationData.username, found: verificationData.found ? 'true' : 'false' }).toString();
             navigator.clipboard.writeText(previewUrl).then(() => {
                 const originalText = copyPreviewBtn.innerHTML;
                 copyPreviewBtn.innerHTML = '<i class="cf-icon cf-icon-checkmark"></i> Скопировано!';
                 copyPreviewBtn.style.borderColor = '#00ff41';
                 copyPreviewBtn.style.color = '#00ff41';
-
-                setTimeout(() => {
-                    copyPreviewBtn.innerHTML = originalText;
-                    copyPreviewBtn.style.borderColor = '';
-                    copyPreviewBtn.style.color = '';
-                }, 2500);
-            }).catch(() => {
-                alert('Не удалось скопировать ссылку. Попробуйте вручную: ' + previewUrl);
+                setTimeout(() => { copyPreviewBtn.innerHTML = originalText; copyPreviewBtn.style.borderColor = ''; copyPreviewBtn.style.color = ''; }, 2500);
             });
         });
 
         openTgBtn.addEventListener('click', function() {
-            const username = verificationData.username;
-            if (username) {
-                const tgLink = `tg://resolve?domain=${username.replace('@', '')}`;
-                window.open(tgLink, '_blank');
+            if (verificationData.username) window.open(`tg://resolve?domain=${verificationData.username.replace('@', '')}`, '_blank');
+        });
+
+        closeResultBtn.addEventListener('click', function() { closeVerifyModal(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+        verifyYouTubeForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (isVerifyingYt) return;
+            clearAllErrors();
+            const url = verifyYtUrl.value.trim();
+            if (!validateYtUrl(url, verifyYtUrlGroup, verifyYtUrlError)) return;
+
+            isVerifyingYt = true;
+            verifyYtSubmitBtn.disabled = true;
+            verifyYtSubmitBtn.innerHTML = '<i class="cf-icon cf-icon-loading"></i> Загрузка...';
+            try {
+                const response = await fetch(YOUTUBE_URL, { cache: 'no-store', signal: AbortSignal.timeout(5000) });
+                if (!response.ok) throw new Error('Ошибка загрузки списка');
+                const channels = parseYouTubeList(await response.text());
+                const found = channels.includes(url);
+                showYouTubeVerificationResult(found, url);
+            } catch (error) {
+                console.error('Ошибка загрузки списка YouTube:', error);
+                alert('❌ Ошибка загрузки списка верификации YouTube. Проверьте подключение к интернету.');
+            } finally {
+                verifyYtSubmitBtn.disabled = false;
+                verifyYtSubmitBtn.innerHTML = '<i class="cf-icon cf-icon-checkmark"></i> Проверить';
+                isVerifyingYt = false;
             }
         });
 
-        closeResultBtn.addEventListener('click', function() {
-            closeVerifyModal();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        closeVerifyYtBtn.addEventListener('click', () => {
+            verifyYouTubeModal.classList.remove('visible');
+            document.body.style.overflow = '';
+            verifyYtResult.classList.remove('visible', 'success', 'error');
+            clearAllErrors();
+            isVerifyingYt = false;
+        });
+        verifyYouTubeModal.addEventListener('click', (e) => {
+            if (e.target === verifyYouTubeModal) {
+                verifyYouTubeModal.classList.remove('visible');
+                document.body.style.overflow = '';
+                verifyYtResult.classList.remove('visible', 'success', 'error');
+                clearAllErrors();
+                isVerifyingYt = false;
+            }
         });
 
-        console.log('✅ MrFeastProject | Верификация с Bad-списком');
+        openYtBtn.addEventListener('click', function() {
+            if (verificationDataYt.url) window.open(verificationDataYt.url, '_blank');
+        });
+
+        copyYtPreviewBtn.addEventListener('click', function() {
+            if (verificationDataYt.url) {
+                navigator.clipboard.writeText(verificationDataYt.url).then(() => {
+                    const originalText = copyYtPreviewBtn.innerHTML;
+                    copyYtPreviewBtn.innerHTML = '<i class="cf-icon cf-icon-checkmark"></i> Скопировано!';
+                    copyYtPreviewBtn.style.borderColor = '#00ff41';
+                    copyYtPreviewBtn.style.color = '#00ff41';
+                    setTimeout(() => { copyYtPreviewBtn.innerHTML = originalText; copyYtPreviewBtn.style.borderColor = ''; copyYtPreviewBtn.style.color = ''; }, 2500);
+                });
+            }
+        });
+
+        closeYtResultBtn.addEventListener('click', function() {
+            verifyYouTubeModal.classList.remove('visible');
+            document.body.style.overflow = '';
+            verifyYtResult.classList.remove('visible', 'success', 'error');
+            clearAllErrors();
+            isVerifyingYt = false;
+        });
+
+        openModalBtn.addEventListener('click', () => { appPlatformModal.classList.add('visible'); document.body.style.overflow = 'hidden'; });
+
+        chooseTgAppBtn.addEventListener('click', () => {
+            appPlatformModal.classList.remove('visible');
+            modalOverlay.classList.add('visible');
+            clearAllErrors();
+            applicationForm.reset();
+        });
+
+        chooseYtAppBtn.addEventListener('click', () => {
+            appPlatformModal.classList.remove('visible');
+            appYouTubeModal.classList.add('visible');
+            clearAllErrors();
+            appYouTubeForm.reset();
+        });
+
+        closeAppPlatformBtn.addEventListener('click', () => { appPlatformModal.classList.remove('visible'); document.body.style.overflow = ''; });
+        appPlatformModal.addEventListener('click', (e) => { if (e.target === appPlatformModal) { appPlatformModal.classList.remove('visible'); document.body.style.overflow = ''; } });
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+        function closeModal() {
+            modalOverlay.classList.remove('visible');
+            document.body.style.overflow = '';
+            clearAllErrors();
+            applicationForm.reset();
+        }
+
+        applicationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            clearAllErrors();
+            const type = contentType.value;
+            const username = usernameInput.value.trim();
+            if (!validateType(type, appTypeGroup, appTypeError) || !validateUsername(username, appUserGroup, appUserError)) return;
+
+            modalOverlay.classList.remove('visible');
+            notification.classList.add('visible');
+
+            let typeForMessage = "";
+            if (type === "Telegram канал") typeForMessage = "Telegram канала";
+            else if (type === "Telegram чат") typeForMessage = "Telegram чата";
+            else if (type === "Telegram бот") typeForMessage = "Telegram бота";
+            else if (type === "Telegram профиль") typeForMessage = "Telegram профиля";
+
+            const message = `✧ Здравствуйте! Я отправил(а) заявку регистрацию моего ${typeForMessage} в MrFeastProject для получения верификации ✧\n\nТип:${type}\nЮзернейм:${username}`;
+            const encodedMessage = encodeURIComponent(message);
+            const tgLink = `tg://resolve?domain=MrFeastProjectVerificatedManager&text=${encodedMessage}`;
+
+            setTimeout(() => {
+                window.open(tgLink, '_blank');
+                setTimeout(() => { notification.classList.remove('visible'); }, 1500);
+            }, 2000);
+        });
+
+        closeAppYtBtn.addEventListener('click', () => {
+            appYouTubeModal.classList.remove('visible');
+            document.body.style.overflow = '';
+            clearAllErrors();
+            appYouTubeForm.reset();
+        });
+        appYouTubeModal.addEventListener('click', (e) => {
+            if (e.target === appYouTubeModal) {
+                appYouTubeModal.classList.remove('visible');
+                document.body.style.overflow = '';
+                clearAllErrors();
+                appYouTubeForm.reset();
+            }
+        });
+
+        appYouTubeForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            clearAllErrors();
+            const url = appYtUrl.value.trim();
+            if (!validateYtUrl(url, appYtUrlGroup, appYtUrlError)) return;
+
+            appYouTubeModal.classList.remove('visible');
+            notification.classList.add('visible');
+
+            const message = `✧ Здравствуйте! Я отправил(а) заявку регистрацию моего YouTube канала в MrFeastProject для получения верификации ✧\n\nТип:Канал\nURL:${url}`;
+            const encodedMessage = encodeURIComponent(message);
+            const tgLink = `tg://resolve?domain=MrFeastProjectVerificatedManager&text=${encodedMessage}`;
+
+            setTimeout(() => {
+                window.open(tgLink, '_blank');
+                setTimeout(() => { notification.classList.remove('visible'); }, 1500);
+            }, 2000);
+        });
+
+        console.log('✅ MrFeastProject | Верификация с Bad-списком и YouTube');
     })();
 </script>
-
 </body>
-    </html>
+            </html>
