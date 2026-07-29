@@ -1725,10 +1725,10 @@
     <div class="notification-box">
         <span class="icon-big"><i class="cf-icon cf-icon-time"></i></span>
         <h3>Подождите 2 секунды</h3>
-        <p>Вас перенаправляет в Telegram-личку владельца. При открытии просто нажмите «Отправить».</p>
+        <p>Вас перенаправляет в Telegram-личку Менеджера. При открытии просто нажмите «Отправить».</p>
         <div class="spinner-small"></div>
         <p style="margin-top: 12px; font-size: 0.7rem; color: #6f9f6f;">
-            <i class="cf-icon cf-icon-checkmark"></i> @MrFeast_Official
+            <i class="cf-icon cf-icon-checkmark"></i> @MrFeastProjectVerificatedManager
         </p>
     </div>
 </div>
@@ -1893,8 +1893,9 @@
             verifyResult.classList.add('visible');
 
             const roles = {
-                '@MrFeast_Official': { text: '<i class="cf-icon cf-icon-user"></i> Владелец сайта' },
-                '@MrFeast_Official2': { text: '<i class="cf-icon cf-icon-user"></i> Владелец сайта' },
+                '@MrFeast_Official': { text: '<i class="cf-icon cf-icon-user"></i> ✧ Владелец сайта ✧' },
+                '@MrFeast_Official2': { text: '<i class="cf-icon cf-icon-user"></i> ✧ Владелец сайта ✧' },
+                '@MrFeastProjectVerificatedManager': { text: '<i class="cf-icon cf-icon-user"></i> ✧ Manager ✧' },
                 '@VerificationMrFeastProject_BOT': { text: '<i class="cf-icon cf-icon-computer"></i> Телеграмм бот — Перенаправление на сайт' }
             };
 
@@ -2126,7 +2127,7 @@
             setTimeout(() => {
                 const message = `Здравствуйте! Я отправил(а) заявку на верификацию моего ${typeForMessage}\n\nТип: ${type}\nЮзернейм: ${username}`;
                 const encodedMessage = encodeURIComponent(message);
-                const tgLink = `tg://resolve?domain=MrFeast_Official&text=${encodedMessage}`;
+                const tgLink = `tg://resolve?domain=MrFeastProjectVerificatedManager&text=${encodedMessage}`;
 
                 window.open(tgLink, '_blank');
 
