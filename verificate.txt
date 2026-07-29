@@ -3,14 +3,18 @@
 @MrFeastBioOfficial
 @NewsStealAMrFeastFriends
 @XersonaVPN
+@nazu_vpn
 
 ==Telegram Chat==
 @ttdgame1
+@nazuvpnchat
+@nazuvpnFAQ
 
 ==Telegram Bot==
 @MrFeastClicker_BOT
 @VerificationMrFeastProject_BOT
 @piar_wram_Bot
+@nazuvpn_bot
 
 ==Telegram User==
 @MrFeast_Official
