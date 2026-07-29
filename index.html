@@ -1637,7 +1637,6 @@
         let isVerifying = false;
         let isVerifyingYt = false;
 
-        // ===== НОВАЯ ФУНКЦИЯ: извлечение @username из YouTube ссылки =====
         function extractYouTubeUsername(url) {
             const match = url.match(/@([^\/\?#]+)/);
             return match ? '@' + match[1] : url;
@@ -1765,8 +1764,8 @@
         function showVerificationResult(found, type, username, wasExpired, inBad) {
             verifyResult.classList.add('visible');
             const roles = {
-                '@MrFeast_Official': { text: '<i class="cf-icon cf-icon-user"></i> ✧ Владелец сайта ✧' },
-                '@MrFeast_Official2': { text: '<i class="cf-icon cf-icon-user"></i> ✧ Владелец сайта ✧' },
+                '@MrFeast_Official': { text: '<i class="cf-icon cf-icon-user"></i>  Владелец сайта ✧' },
+                '@MrFeast_Official2': { text: '<i class="cf-icon cf-icon-user"></i>  Владелец сайта ✧' },
                 '@MrFeastProjectVerificatedManager': { text: '<i class="cf-icon cf-icon-user"></i> ✧ Manager ✧' },
                 '@VerificationMrFeastProject_BOT': { text: '<i class="cf-icon cf-icon-computer"></i> Телеграмм бот — Перенаправление на сайт' }
             };
@@ -1832,7 +1831,6 @@
             resultYtImage.alt = found ? 'Верификация найдена' : 'Нет верификации';
             resultYtTitle.style.color = '';
 
-            // ===== ИЗВЛЕКАЕМ @username ИЗ ССЫЛКИ =====
             const ytUsername = extractYouTubeUsername(url);
 
             if (found) {
@@ -2076,15 +2074,23 @@
         });
 
         copyYtPreviewBtn.addEventListener('click', function() {
-            if (verificationDataYt.url) {
-                navigator.clipboard.writeText(verificationDataYt.url).then(() => {
-                    const originalText = copyYtPreviewBtn.innerHTML;
-                    copyYtPreviewBtn.innerHTML = '<i class="cf-icon cf-icon-checkmark"></i> Скопировано!';
-                    copyYtPreviewBtn.style.borderColor = '#00ff41';
-                    copyYtPreviewBtn.style.color = '#00ff41';
-                    setTimeout(() => { copyYtPreviewBtn.innerHTML = originalText; copyYtPreviewBtn.style.borderColor = ''; copyYtPreviewBtn.style.color = ''; }, 2500);
-                });
-            }
+            if (!verificationDataYt.url) return;
+            const ytUsername = verificationDataYt.username || extractYouTubeUsername(verificationDataYt.url);
+            const baseUrl = window.location.origin + window.location.pathname.replace('index.html', '');
+            const previewUrl = baseUrl + 'preview.html?' + new URLSearchParams({ 
+                type: 'YouTube канал', 
+                username: ytUsername, 
+                found: verificationDataYt.found ? 'true' : 'false',
+                url: verificationDataYt.url
+            }).toString();
+            
+            navigator.clipboard.writeText(previewUrl).then(() => {
+                const originalText = copyYtPreviewBtn.innerHTML;
+                copyYtPreviewBtn.innerHTML = '<i class="cf-icon cf-icon-checkmark"></i> Скопировано!';
+                copyYtPreviewBtn.style.borderColor = '#00ff41';
+                copyYtPreviewBtn.style.color = '#00ff41';
+                setTimeout(() => { copyYtPreviewBtn.innerHTML = originalText; copyYtPreviewBtn.style.borderColor = ''; copyYtPreviewBtn.style.color = ''; }, 2500);
+            });
         });
 
         closeYtResultBtn.addEventListener('click', function() {
@@ -2139,7 +2145,7 @@
             else if (type === "Telegram бот") typeForMessage = "Telegram бота";
             else if (type === "Telegram профиль") typeForMessage = "Telegram профиля";
 
-            const message = `✧ Здравствуйте! Я отправил(а) заявку регистрацию моего ${typeForMessage} в MrFeastProject для получения верификации ✧\n\nТип:${type}\nЮзернейм:${username}`;
+            const message = ` Здравствуйте! Я отправил(а) заявку регистрацию моего ${typeForMessage} в MrFeastProject для получения верификации ✧\n\nТип:${type}\nЮзернейм:${username}`;
             const encodedMessage = encodeURIComponent(message);
             const tgLink = `tg://resolve?domain=MrFeastProjectVerificatedManager&text=${encodedMessage}`;
 
@@ -2187,4 +2193,4 @@
     })();
 </script>
 </body>
-            </html>
+    </html>
