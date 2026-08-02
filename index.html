@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Верификация | MrFeastProject</title>
+    <script>try{if(localStorage.getItem('mrfeast_warning_accepted')==='1'){document.documentElement.classList.add('warning-accepted');}}catch(e){}</script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cloudflare-icons/2.3.4/cloudflare-icons.min.css" />
     <style>
         * {
@@ -183,6 +185,13 @@
             white-space: nowrap;
         }
 
+        .stat-number.bad {
+            background: linear-gradient(135deg, #ff9999, #ff4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .stat-label {
             font-size: 0.5rem;
             color: #6f9f6f;
@@ -190,6 +199,12 @@
             letter-spacing: 0.5px;
             margin-top: 1px;
             white-space: nowrap;
+        }
+
+        .stat-label.bad {
+            color: #ff6666;
+            white-space: normal;
+            line-height: 1.3;
         }
 
         .header {
@@ -1184,6 +1199,158 @@
             fill: currentColor;
         }
 
+        /* ===== WARNING OVERLAY (FeastAntiSpy) ===== */
+        #warningOverlay {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.94);
+            backdrop-filter: blur(14px);
+        }
+
+        #warningOverlay::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 30%, rgba(255, 212, 0, 0.07) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        html.warning-accepted #warningOverlay {
+            display: none !important;
+        }
+
+        .warning-box {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            background: #0c0c0a;
+            border: 1px solid rgba(255, 212, 0, 0.35);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(255, 212, 0, 0.08);
+            animation: modalSlide 0.35s ease-out;
+        }
+
+        @keyframes modalSlide {
+            0% { transform: translateY(16px) scale(0.96); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .warning-tape {
+            height: 14px;
+            background: repeating-linear-gradient(45deg, #ffd400 0 14px, #0c0c0a 14px 28px);
+        }
+
+        .warning-body {
+            padding: 24px 22px 22px;
+        }
+
+        .warning-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #ffd400;
+            text-shadow: 0 0 24px rgba(255, 212, 0, 0.35);
+            margin-bottom: 14px;
+        }
+
+        .warning-title .w-ico {
+            width: 34px;
+            height: 34px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9px;
+            background: rgba(255, 212, 0, 0.12);
+            border: 1px solid rgba(255, 212, 0, 0.4);
+            color: #ffd400;
+            font-size: 1.2rem;
+            animation: alertIconPulse 1.4s ease-in-out infinite;
+        }
+
+        .warning-text {
+            color: #d8d2b0;
+            font-size: 0.82rem;
+            line-height: 1.65;
+        }
+
+        .warning-text p {
+            margin-bottom: 10px;
+        }
+
+        .warning-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .warning-text .hl {
+            color: #ffd400;
+            font-weight: 700;
+        }
+
+        .warning-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-warn {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.25s;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-warn-accept {
+            background: linear-gradient(135deg, #ffd400, #f5b800);
+            color: #0a0a00;
+            box-shadow: 0 0 24px rgba(255, 212, 0, 0.25);
+        }
+
+        .btn-warn-accept:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 36px rgba(255, 212, 0, 0.4);
+        }
+
+        .btn-warn-accept:active {
+            transform: scale(0.97);
+        }
+
+        .btn-warn-decline {
+            background: transparent;
+            border: 1px solid rgba(255, 212, 0, 0.4);
+            color: #ffd400;
+        }
+
+        .btn-warn-decline:hover {
+            background: rgba(255, 212, 0, 0.08);
+            border-color: #ffd400;
+        }
+
+        .btn-warn-decline:active {
+            transform: scale(0.97);
+        }
+
+        /* ===== АДАПТИВ ===== */
         @media (max-width: 480px) {
             .container { padding: 16px 12px 20px; }
             .step-title { font-size: 1rem; padding: 4px 12px; }
@@ -1207,6 +1374,9 @@
                 width: 100%;
                 justify-content: center;
             }
+            .warning-actions { flex-direction: column; }
+            .warning-title { font-size: 1.2rem; letter-spacing: 2px; }
+            .warning-body { padding: 20px 16px 18px; }
         }
 
         @media (max-width: 380px) {
@@ -1220,6 +1390,32 @@
 </head>
 <body>
 
+<!-- ===== WARNING OVERLAY (FeastAntiSpy) ===== -->
+<div id="warningOverlay">
+    <div class="warning-box">
+        <div class="warning-tape"></div>
+        <div class="warning-body">
+            <div class="warning-title">
+                <span class="w-ico"><i class="cf-icon cf-icon-warning"></i></span>
+                Warning
+            </div>
+            <div class="warning-text">
+                <p>Данный сайт использует технологию <span class="hl">FeastAntiSpy</span>, чтобы хакеры и мошенники не могли перехватить со стороны телефона/сервера трафик и не украсть тем самым аккаунт.</p>
+                <p>Пользуясь дальше данным сайтом, вы отправляете на сервера MrFeastProject анонимно IP-адрес и весь свой трафик (в обход VPN и прокси), чтобы выявлять подозрительную активность и автоматически блокировать её.</p>
+                <p>В случае отказа мы вынуждены заблокировать доступ к сайту, если вы нажмёте «Отклонить», ровно до того момента, как не согласитесь.</p>
+            </div>
+            <div class="warning-actions">
+                <button type="button" class="btn-warn btn-warn-accept" id="warningAcceptBtn">
+                    <i class="cf-icon cf-icon-checkmark"></i> Принять
+                </button>
+                <button type="button" class="btn-warn btn-warn-decline" id="warningDeclineBtn">
+                    <i class="cf-icon cf-icon-close"></i> Отклонить
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container" id="mainContainer">
     <div class="alert-banner" id="alertBanner">
         <i class="cf-icon cf-icon-warning"></i> ОБНАРУЖЕНА ПЛОХАЯ РЕПУТАЦИЯ
@@ -1227,7 +1423,7 @@
 
     <div class="stats-bar">
         <div class="stat-item"><div class="stat-number" id="totalVerified">0</div><div class="stat-label">Верифицировано</div></div>
-        <div class="stat-item"><div class="stat-number" id="totalChannels">0</div><div class="stat-label">Каналов</div></div>
+        <div class="stat-item"><div class="stat-number bad" id="totalBad">0</div><div class="stat-label bad">С плохой<br>репутацией</div></div>
         <div class="stat-item"><div class="stat-number">99.8%</div><div class="stat-label">Надёжность</div></div>
         <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Проверка</div></div>
     </div>
@@ -1536,6 +1732,27 @@
     (function() {
         'use strict';
 
+        /* ===== WARNING (FeastAntiSpy) ===== */
+        const warningAcceptBtn = document.getElementById('warningAcceptBtn');
+        const warningDeclineBtn = document.getElementById('warningDeclineBtn');
+
+        warningAcceptBtn.addEventListener('click', function() {
+            try { localStorage.setItem('mrfeast_warning_accepted', '1'); } catch (e) {}
+            document.documentElement.classList.add('warning-accepted');
+        });
+
+        warningDeclineBtn.addEventListener('click', function() {
+            try {
+                if (window.Telegram && Telegram.WebApp && typeof Telegram.WebApp.close === 'function') {
+                    Telegram.WebApp.close();
+                } else {
+                    window.close();
+                }
+            } catch (e) {
+                window.close();
+            }
+        });
+
         const step1 = document.getElementById('step1');
         const step2 = document.getElementById('step2');
         const step3 = document.getElementById('step3');
@@ -1622,7 +1839,7 @@
         const notification = document.getElementById('notification');
         const statsModal = document.getElementById('statsModal');
         const totalVerifiedEl = document.getElementById('totalVerified');
-        const totalChannelsEl = document.getElementById('totalChannels');
+        const totalBadEl = document.getElementById('totalBad');
 
         const VERIFICATE_URL = 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/verificate.txt';
         const BAD_URL = 'https://raw.githubusercontent.com/MrFeastProject/VerificateMrFeastProject/refs/heads/main/Bad.txt';
@@ -1632,7 +1849,6 @@
         let verificationData = {};
         let verificationDataYt = {};
         let totalCount = 0;
-        let totalChannelsCount = 0;
         let youtubeChannelsCount = 0;
         let isVerifying = false;
         let isVerifyingYt = false;
@@ -1740,11 +1956,16 @@
             
             const tgChannelsCount = vCategories['Канал'].length;
             youtubeChannelsCount = ytChannels.length;
-            totalChannelsCount = tgChannelsCount + youtubeChannelsCount;
+
+            const badTotal =
+                (bCategories['Канал'].length || 0) +
+                (bCategories['Чат'].length || 0) +
+                (bCategories['Бот'].length || 0) +
+                (bCategories['Юзер'].length || 0);
             
             totalCount = total + youtubeChannelsCount;
             totalVerifiedEl.textContent = totalCount;
-            totalChannelsEl.textContent = totalChannelsCount;
+            totalBadEl.textContent = badTotal;
             
             document.getElementById('vChannels').textContent = tgChannelsCount;
             document.getElementById('vChats').textContent = vCategories['Чат'].length;
@@ -1764,8 +1985,8 @@
         function showVerificationResult(found, type, username, wasExpired, inBad) {
             verifyResult.classList.add('visible');
             const roles = {
-                '@MrFeast_Official': { text: '<i class="cf-icon cf-icon-user"></i>  Владелец сайта ✧' },
-                '@MrFeast_Official2': { text: '<i class="cf-icon cf-icon-user"></i>  Владелец сайта ✧' },
+                '@MrFeast_Official': { text: '<i class="cf-icon cf-icon-user"></i> ✧ Владелец сайта ✧' },
+                '@MrFeast_Official2': { text: '<i class="cf-icon cf-icon-user"></i> ✧ Владелец сайта ✧' },
                 '@MrFeastProjectVerificatedManager': { text: '<i class="cf-icon cf-icon-user"></i> ✧ Manager ✧' },
                 '@VerificationMrFeastProject_BOT': { text: '<i class="cf-icon cf-icon-computer"></i> Телеграмм бот — Перенаправление на сайт' }
             };
@@ -2145,7 +2366,7 @@
             else if (type === "Telegram бот") typeForMessage = "Telegram бота";
             else if (type === "Telegram профиль") typeForMessage = "Telegram профиля";
 
-            const message = ` Здравствуйте! Я отправил(а) заявку регистрацию моего ${typeForMessage} в MrFeastProject для получения верификации ✧\n\nТип:${type}\nЮзернейм:${username}`;
+            const message = `✧ Здравствуйте! Я отправил(а) заявку регистрацию моего ${typeForMessage} в MrFeastProject для получения верификации ✧\n\nТип:${type}\nЮзернейм:${username}`;
             const encodedMessage = encodeURIComponent(message);
             const tgLink = `tg://resolve?domain=MrFeastProjectVerificatedManager&text=${encodedMessage}`;
 
@@ -2189,8 +2410,8 @@
             }, 2000);
         });
 
-        console.log('✅ MrFeastProject | Верификация с Bad-списком и YouTube');
+        console.log('✅ MrFeastProject | Верификация с Bad-списком, YouTube и FeastAntiSpy');
     })();
 </script>
 </body>
-    </html>
+</html>
