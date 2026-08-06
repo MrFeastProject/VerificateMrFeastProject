@@ -16,6 +16,7 @@
 @VerificationMrFeastProject_BOT
 @piar_wram_Bot
 @nazuvpn_bot
+@KillerCasinoOfficialBot
 
 ==Telegram User==
 @MrFeast_Official
